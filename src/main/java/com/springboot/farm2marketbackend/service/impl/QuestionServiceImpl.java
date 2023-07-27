@@ -31,6 +31,7 @@ public class QuestionServiceImpl implements QuestionService {
         questionResponseDto.setAuthor(question.getAuthor());
         questionResponseDto.setContent(question.getContent());
         questionResponseDto.setTitle(question.getTitle());
+        questionResponseDto.setModifiedDate(question.getModifiedDate());
 
         return questionResponseDto;
     }
@@ -44,6 +45,8 @@ public class QuestionServiceImpl implements QuestionService {
         question.setContent(questionDto.getContent());
         question.setTitle(questionDto.getTitle());
         question.setContent(questionDto.getContent());
+        question.setCreatedDate(questionDto.getCreatedDate());
+        question.setModifiedDate(questionDto.getModifiedDate());
 
         Question savedQuestion = questionDAO.insertQuestion(question);
 
@@ -67,6 +70,7 @@ public class QuestionServiceImpl implements QuestionService {
         questionResponseDto.setId(changedQuestion.getId());
         questionResponseDto.setAuthor(changedQuestion.getAuthor());
         questionResponseDto.setContent(changedQuestion.getContent());
+        questionResponseDto.setModifiedDate(changedQuestion.getModifiedDate());
 
         return questionResponseDto;
     }

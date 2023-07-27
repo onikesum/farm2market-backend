@@ -17,5 +17,6 @@ public class QuestionResponseDto {
     private String author;
     private String title;
     private String content;
+    private LocalDateTime modifiedDate;
 
 }
