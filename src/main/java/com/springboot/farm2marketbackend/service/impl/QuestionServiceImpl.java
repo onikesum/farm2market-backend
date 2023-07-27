@@ -42,13 +42,17 @@ public class QuestionServiceImpl implements QuestionService {
 
         question.setAuthor(questionDto.getAuthor());
         question.setContent(questionDto.getContent());
+        question.setTitle(questionDto.getTitle());
+        question.setContent(questionDto.getContent());
 
         Question savedQuestion = questionDAO.insertQuestion(question);
 
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+
         questionResponseDto.setId(savedQuestion.getId());
         questionResponseDto.setAuthor(savedQuestion.getAuthor());
         questionResponseDto.setContent(savedQuestion.getContent());
+        questionResponseDto.setTitle(savedQuestion.getTitle());
 
 
         return questionResponseDto;

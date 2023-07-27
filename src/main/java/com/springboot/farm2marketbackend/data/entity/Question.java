@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -31,9 +31,11 @@ public class Question {
     @Column(nullable = false)
     private String content;
 
-
+    @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime createdDate;
 
+    @LastModifiedDate
     private LocalDateTime modifiedDate;
 
 }
