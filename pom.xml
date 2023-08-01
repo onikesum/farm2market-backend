@@ -52,6 +52,11 @@
 			<optional>true</optional>
 		</dependency>
 		<!-- 기타 의존성들... -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.22</version> <!-- 적절한 버전으로 변경하세요 -->
+		</dependency>
 	</dependencies>
 
 	<build>
