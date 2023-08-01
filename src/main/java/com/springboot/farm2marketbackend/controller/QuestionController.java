@@ -23,6 +23,7 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
+
     @GetMapping()
     public ResponseEntity<QuestionResponseDto> getQuestion(Long id) {
         QuestionResponseDto questionResponseDto = questionService.getQuestion(id);

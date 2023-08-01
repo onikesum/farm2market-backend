@@ -48,7 +48,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             Question Question = selectedQuestion.get();
 
               Question.setContent(content);
-                Question.setModifiedDate(LocalDateTime.now());
+              Question.setModifiedDate(LocalDateTime.now());
 
             updatedQuestion = questionRepository.save(Question);
         } else {
