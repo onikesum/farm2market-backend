@@ -1,22 +1,21 @@
 package com.springboot.farm2marketbackend.data.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
-@Table(name = "Account")
+@Getter
+@Builder
+@ToString(exclude = "name")
+@Table(name = "account")
 // 다른 패키지에서 생성자 함부로 생성하지 마세요!
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account {
 
     @Id
-    // SQL 에서 자동생성되도록 돕는 어노테이션
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "account_id")
     private Long id;
 
     private String username;
