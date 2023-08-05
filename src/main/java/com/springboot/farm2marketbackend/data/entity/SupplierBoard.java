@@ -37,8 +37,13 @@ public class SupplierBoard {
 
     @Column(nullable = false)
     private Long supplier_id;
+    @Lob
+    @Column
+    private byte[] imageData; // 이미지 데이터
 
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image")
+    private Image image;
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;

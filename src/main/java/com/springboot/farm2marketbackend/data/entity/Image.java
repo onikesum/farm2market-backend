@@ -20,7 +20,9 @@ public class Image {
 
     private String name;
     private String imgType;
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supplier_board_id")
+    private SupplierBoard supplierBoard;
     @Lob
     @Column
     private byte[] imageData;

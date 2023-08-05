@@ -1,5 +1,7 @@
 package com.springboot.farm2marketbackend.data.dto;
 
+import com.springboot.farm2marketbackend.data.entity.Image;
+import com.springboot.farm2marketbackend.data.entity.SupplierBoard;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -16,12 +18,6 @@ import java.time.LocalDateTime;
 public class SupplierBoardDto {
     private Long id;
 
-//    private MultipartFile imgFile; //브라우저에서 controller 파일 담는 용도
-//    private String originalFileName; //원본 파일 이름
-//    private String storedFileName; // 서버 저장용 이름
-//    private int fileAttached; // 파일 첨부 여부(첨부1, 미첨부 0)
-
-
     private String name;
 
     private String product;
@@ -34,4 +30,28 @@ public class SupplierBoardDto {
     private LocalDateTime createdDate;
 
     private LocalDateTime modifiedDate;
+    private Image image;
+    private Long imageId;
+
+private ImageDto imageDto;
+    private String imageName; // 이미지 파일명
+    private String imageType; // 이미지 파일 타입
+    private byte[] imageData;
+
+    public SupplierBoard toEntity() {
+        return SupplierBoard.builder()
+                .id(id)
+                .name(name)
+                .product(product)
+                .price(price)
+                .keyword(keyword)
+                .supplier_id(supplier_id)
+                .createdDate(createdDate)
+                .modifiedDate(modifiedDate)
+                .build();
+    }
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
+
 }

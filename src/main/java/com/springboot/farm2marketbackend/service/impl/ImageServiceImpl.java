@@ -16,21 +16,28 @@ import java.io.IOException;
 public class ImageServiceImpl implements ImageService {
 
     private final ImageRepository imageRepository;
-
-
     public Image uploadImage(MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty()) {
+            // 클라이언트가 이미지 파일을 전송하지 않은 경우, 예외 처리 로직을 추가하여 필요한 동작 수행
+            throw new IllegalArgumentException("이미지 파일이 전송되지 않았습니다.");
+        }
         log.info("upload file: {}", file);
+        byte[] imageData = ImageUtils.compressImage(file.getBytes());
 
         Image image = Image.builder()
                 .name(file.getOriginalFilename())
                 .imgType(file.getContentType())
+                .imageData(imageData)
                 .build();
 
-        // 이미지 데이터를 바이트 배열로 변환하여 설정합니다.
-        image.setImageData(file.getBytes());
+        image = imageRepository.save(image);
 
-        // 데이터베이스에 이미지 정보를 저장합니다.
-        return imageRepository.save(image);
+        if (image != null) {
+            log.info("imageData: {}", image);
+            return image;
+        }
+
+        return null;
     }
 
 
@@ -40,9 +47,13 @@ public class ImageServiceImpl implements ImageService {
 
             Image image = imageRepository.findByName(fileName)
                     .orElseThrow(() -> new RuntimeException("Image not found with name: " + fileName));
-
         log.info("download imageData: {}", image);
 
         return ImageUtils.decompressImage(image.getImageData());
+    }
+
+    @Override
+    public void deleteSupplierBoard(Long id) {
+        imageRepository.deleteById(id);
     }
 }

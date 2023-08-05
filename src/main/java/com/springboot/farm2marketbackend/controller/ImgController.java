@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.LocalDateTime;
+
+import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,6 +39,15 @@ public class ImgController {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(downloadImage);
+    }
+    @DeleteMapping()
+    public ResponseEntity<String> deleteSupplierBoard (Long id, HttpServletRequest request) throws Exception
+    {
+        storageService.deleteSupplierBoard(id);
+
+        LOGGER.info("호출 API: " + "delete SupplierBoard" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body("성공적으로 삭제 되었습니다.");
     }
 
 }

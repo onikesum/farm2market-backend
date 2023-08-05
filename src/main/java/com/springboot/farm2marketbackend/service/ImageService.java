@@ -9,4 +9,6 @@ import java.io.IOException;
 public interface ImageService {
     Image uploadImage(MultipartFile file) throws IOException;
     byte[] downloadImage(@PathVariable("fileName") String fileName);
-    }
+
+    void deleteSupplierBoard(Long id);
+}

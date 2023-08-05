@@ -1,15 +1,15 @@
 package com.springboot.farm2marketbackend.data.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ImageDto {
-    private String uploadFileName;
+    private String name;
+    private String imgType;
+
     private byte[] imageData;
 }
