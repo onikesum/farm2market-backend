@@ -2,7 +2,7 @@ package com.springboot.farm2marketbackend.data.dao.impl;
 
 import com.springboot.farm2marketbackend.data.dao.AnswerDAO;
 import com.springboot.farm2marketbackend.data.entity.Answer;
-import com.springboot.farm2marketbackend.data.repository.AnswerRepository;
+import com.springboot.farm2marketbackend.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

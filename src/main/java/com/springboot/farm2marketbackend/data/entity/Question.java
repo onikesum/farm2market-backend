@@ -31,7 +31,8 @@ public class Question {
 
     @Column(nullable = false)
     private String content;
-
+    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+    private Answer answer;
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;

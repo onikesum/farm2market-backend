@@ -7,6 +7,8 @@ import com.springboot.farm2marketbackend.data.entity.SupplierBoard;
 import com.springboot.farm2marketbackend.data.entity.SupplierBoardAndImageResponse;
 import com.springboot.farm2marketbackend.service.ImageService;
 import com.springboot.farm2marketbackend.service.SupplierBoardService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,9 @@ public class SupplierBoardController {
         this.imageService = imageService;
     }
 
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     @PostMapping
     public ResponseEntity<SupplierBoardDto> createSupplierBoard(
             @RequestParam("file") MultipartFile imageFile,
@@ -62,7 +66,9 @@ public class SupplierBoardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSupplierBoardDto);
     }
 
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<SupplierBoardDto> getSupplierBoard(@PathVariable Long id, HttpServletRequest request) {
         SupplierBoardDto supplierBoardDtoResponse = supplierBoardService.getSupplierBoard(id);
@@ -77,7 +83,9 @@ public class SupplierBoardController {
 
         return ResponseEntity.status(HttpStatus.OK).body(supplierBoardDtoResponse);
     }
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<SupplierBoardDto> updateSupplierBoard(
             @PathVariable Long id,
@@ -100,7 +108,9 @@ public class SupplierBoardController {
         SupplierBoardDto supplierBoardDtoResponse = supplierBoardService.updateSupplierBoard(id, supplierBoardDto);
         return ResponseEntity.status(HttpStatus.OK).body(supplierBoardDtoResponse);
     }
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     @DeleteMapping()
     public ResponseEntity<String> deleteSupplierBoard (Long id, HttpServletRequest request) throws Exception
     {

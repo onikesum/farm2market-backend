@@ -2,6 +2,8 @@ package com.springboot.farm2marketbackend.controller;
 
 import com.springboot.farm2marketbackend.data.entity.Image;
 import com.springboot.farm2marketbackend.service.ImageService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +24,9 @@ import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 public class ImgController {
 
     final private ImageService storageService;
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     // 업로드
     @PostMapping
     @PermitAll
@@ -31,7 +35,9 @@ public class ImgController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(uploadImage);
     }
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     // 다운로드
     @GetMapping("/{fileName}")
     public ResponseEntity<?> downloadImage(@PathVariable("fileName") String fileName) {
@@ -40,6 +46,9 @@ public class ImgController {
                 .contentType(MediaType.valueOf("image/png"))
                 .body(downloadImage);
     }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     @DeleteMapping()
     public ResponseEntity<String> deleteSupplierBoard (Long id, HttpServletRequest request) throws Exception
     {
