@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString(exclude = "name")
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "question")
 public class Question {
 
