@@ -6,10 +6,10 @@ function App () {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        fetch('/api/hello')
+        fetch('/login')
             .then(response => response.text())
-            .then(message => {
-                setMessage(message);
+            .then(content => {
+                setLoginPageContent(content);
             });
     },[])
     return (
