@@ -1,5 +1,6 @@
 package com.springboot.farm2marketbackend.data.entity;
 
+import com.springboot.farm2marketbackend.service.SellerBoardService;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,9 +21,10 @@ public class Image {
 
     private String name;
     private String imgType;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "supplier_board_id")
+    @OneToOne(mappedBy = "image", cascade = CascadeType.ALL)
     private SupplierBoard supplierBoard;
+    @OneToOne(mappedBy = "image", cascade = CascadeType.ALL)
+    private SellerBoard sellerBoard;
     @Lob
     @Column
     private byte[] imageData;
