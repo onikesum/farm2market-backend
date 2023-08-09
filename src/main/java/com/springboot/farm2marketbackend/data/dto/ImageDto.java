@@ -10,6 +10,8 @@ import lombok.*;
 public class ImageDto {
     private String name;
     private String imgType;
-
     private byte[] imageData;
+    private Long supplier_id;
+    private Long seller_id;
+
 }

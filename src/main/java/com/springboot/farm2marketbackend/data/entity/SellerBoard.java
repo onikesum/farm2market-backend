@@ -1,5 +1,4 @@
 package com.springboot.farm2marketbackend.data.entity;
-
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,8 +16,8 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @ToString(exclude = "name")
-@Table(name = "supplierBoard")
-public class SupplierBoard {
+@Table(name = "sellerBoard")
+public class SellerBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,11 +34,12 @@ public class SupplierBoard {
     @Column(nullable = false)
     private String keyword;
 
-    @Column(nullable = false)
-    private Long supplier_id;
     @Lob
     @Column
     private byte[] imageData; // 이미지 데이터
+
+    @Column(name = "image_id") // image_id 컬럼 추가
+    private Long imageId; // 이미지와의 연결을 위한 외래키
 
     @OneToOne
     @JoinColumn(name = "image_id", insertable = false, updatable = false)
@@ -50,5 +50,8 @@ public class SupplierBoard {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
-}
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
+    }
 
+}
