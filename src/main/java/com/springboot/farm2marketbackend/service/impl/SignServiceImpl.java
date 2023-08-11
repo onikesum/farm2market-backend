@@ -35,13 +35,14 @@ public class SignServiceImpl implements SignService {
     }
 
     @Override
-    public SignUpResultDto signUp(String id, String password, String name, String role) {
+    public SignUpResultDto signUp(String id, String password, String name, String role, String phonenumber) {
         LOGGER.info("[getSignUpResult] 회원 가입 정보 전달");
         User user;
         if (role.equalsIgnoreCase("admin")) {
             user = User.builder()
                     .uid(id)
                     .name(name)
+                    .phonenumber(phonenumber)
                     .password(passwordEncoder.encode(password))
                     .roles(Collections.singletonList("ROLE_ADMIN"))
                     .build();
@@ -49,6 +50,7 @@ public class SignServiceImpl implements SignService {
             user = User.builder()
                     .uid(id)
                     .name(name)
+                    .phonenumber(phonenumber)
                     .password(passwordEncoder.encode(password))
                     .roles(Collections.singletonList("ROLE_USER"))
                     .build();
@@ -105,4 +107,5 @@ public class SignServiceImpl implements SignService {
         result.setCode(CommonResponse.FAIL.getCode());
         result.setMsg(CommonResponse.FAIL.getMsg());
     }
+
 }

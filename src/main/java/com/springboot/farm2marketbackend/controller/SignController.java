@@ -2,7 +2,10 @@ package com.springboot.farm2marketbackend.controller;
 
 import com.springboot.farm2marketbackend.data.dto.SignInResultDto;
 import com.springboot.farm2marketbackend.data.dto.SignUpResultDto;
+import com.springboot.farm2marketbackend.service.FindUserService;
 import com.springboot.farm2marketbackend.service.SignService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiParam;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,10 +34,12 @@ public class SignController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(SignController.class);
     private final SignService signService;
+    private final FindUserService findUserService;
 
     @Autowired
-    public SignController(SignService signService) {
+    public SignController(SignService signService, FindUserService findUserService) {
         this.signService = signService;
+        this.findUserService = findUserService;
     }
 
     @PostMapping(value = "/sign-in")
@@ -57,10 +62,11 @@ public class SignController {
             @ApiParam(value = "ID", required = true) @RequestParam String id,
             @ApiParam(value = "비밀번호", required = true) @RequestParam String password,
             @ApiParam(value = "이름", required = true) @RequestParam String name,
+            @ApiParam(value = "핸드폰번호", required = true) @RequestParam String phonenumber,
             @ApiParam(value = "권한", required = true) @RequestParam String role) {
-        LOGGER.info("[signUp] 회원가입을 수행합니다. id : {}, password : ****, name : {}, role : {}", id,
-                name, role);
-        SignUpResultDto signUpResultDto = signService.signUp(id, password, name, role);
+        LOGGER.info("[signUp] 회원가입을 수행합니다. id : {}, password : ****, name : {}, role : {}, phonenumber : {}", id,
+                name, role, phonenumber);
+        SignUpResultDto signUpResultDto = signService.signUp(id, password, name, role, phonenumber);
 
         LOGGER.info("[signUp] 회원가입을 완료했습니다. id : {}", id);
         return signUpResultDto;
@@ -86,6 +92,32 @@ public class SignController {
 
         return ResponseEntity.ok(map);
     }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
+    @GetMapping("/find-id")
+    public ResponseEntity<String> findIdByPhoneNumber(@RequestParam String phoneNumber) {
+        String id = findUserService.findIdByPhoneNumber(phoneNumber);
+        if (id != null) {
+            return ResponseEntity.ok(id);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
+    @GetMapping("/find-password")
+    public ResponseEntity<String> findPasswordByPhoneNumber(@RequestParam String phoneNumber) {
+        String password = findUserService.findPasswordByPhoneNumber(phoneNumber);
+        if (password != null) {
+            return ResponseEntity.ok(password);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @GetMapping(value = "/exception")
     public void exceptionTest() throws RuntimeException {
         throw new RuntimeException("접근이 금지되었습니다.");
