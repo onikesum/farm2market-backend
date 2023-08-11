@@ -71,6 +71,9 @@ public class SignController {
         LOGGER.info("[signUp] 회원가입을 완료했습니다. id : {}", id);
         return signUpResultDto;
     }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     @PostMapping(value = "/logout")
     public ResponseEntity<Map<String, String>> logout(HttpServletRequest request, HttpServletResponse response) {
         // 로그아웃 처리 로직을 여기에 작성합니다.
