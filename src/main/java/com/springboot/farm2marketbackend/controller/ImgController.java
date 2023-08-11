@@ -39,9 +39,9 @@ public class ImgController {
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
     })
     // 다운로드
-    @GetMapping("/{fileName}")
-    public ResponseEntity<?> downloadImage(@PathVariable("fileName") String fileName) {
-        byte[] downloadImage = storageService.downloadImage(fileName);
+    @GetMapping("/{fileId}")
+    public ResponseEntity<?> downloadImage(@PathVariable("fileId") Long fileId) {
+        byte[] downloadImage = storageService.downloadImage(fileId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(downloadImage);

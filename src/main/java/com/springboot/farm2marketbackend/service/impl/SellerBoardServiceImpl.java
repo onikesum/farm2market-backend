@@ -68,6 +68,7 @@ public class SellerBoardServiceImpl implements SellerBoardService {
                     .name(sellerBoardDto.getImageName())
                     .imgType(sellerBoardDto.getImageType())
                     .imageData(sellerBoardDto.getImageData())
+                    .seller_id(sellerBoard.getId())
                     .build();
             Image image = imageService.uploadImage((MultipartFile) imageDto);
             sellerBoard.setImage(image);
@@ -117,6 +118,7 @@ public class SellerBoardServiceImpl implements SellerBoardService {
                     .name(sellerBoardDto.getImageName())
                     .imgType(sellerBoardDto.getImageType())
                     .imageData(sellerBoardDto.getImageData())
+                    .seller_id(sellerBoard.getId())
                     .build();
             Image image = imageService.uploadImage((MultipartFile) imageDto);
             sellerBoard.setImage(image);

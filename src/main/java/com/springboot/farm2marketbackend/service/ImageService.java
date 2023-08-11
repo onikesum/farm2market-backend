@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public interface ImageService {
     Image uploadImage(MultipartFile file) throws IOException;
-    byte[] downloadImage(@PathVariable("fileName") String fileName);
+    byte[] downloadImage(@PathVariable("fileId") Long fileId);
 
     void deleteSupplierBoard(Long id);
 }

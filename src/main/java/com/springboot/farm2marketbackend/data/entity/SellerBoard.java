@@ -14,8 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
-@ToString(exclude = "name")
 @Table(name = "sellerBoard")
 public class SellerBoard {
     @Id
