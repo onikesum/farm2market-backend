@@ -19,4 +19,6 @@ public class SignUpRequestDto {
 
     private String name;
 
+    private String phonenumber;
+
 }
