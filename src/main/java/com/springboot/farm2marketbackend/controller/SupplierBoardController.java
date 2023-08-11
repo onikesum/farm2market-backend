@@ -57,6 +57,7 @@ public class SupplierBoardController {
                 .supplier_id(supplier_id)
                 .createdDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
+                .imageId(image.getId())
                 .build();
 
         // SupplierBoard와 Image를 저장

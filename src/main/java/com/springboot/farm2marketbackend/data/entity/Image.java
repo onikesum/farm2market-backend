@@ -10,8 +10,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString(exclude = "name")
 @Table(name = "image")
 public class Image {
     @Id

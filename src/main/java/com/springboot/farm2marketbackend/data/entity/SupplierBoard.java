@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
-@ToString(exclude = "name")
 @Table(name = "supplierBoard")
 public class SupplierBoard {
     @Id

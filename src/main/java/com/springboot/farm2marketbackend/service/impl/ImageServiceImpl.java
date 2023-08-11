@@ -43,10 +43,10 @@ public class ImageServiceImpl implements ImageService {
 
 
     // 이미지 파일로 압축하기
-    public byte[] downloadImage(String fileName) {
+    public byte[] downloadImage(Long fileId) {
 
-            Image image = imageRepository.findByName(fileName)
-                    .orElseThrow(() -> new RuntimeException("Image not found with name: " + fileName));
+            Image image = imageRepository.findById(fileId)
+                    .orElseThrow(() -> new RuntimeException("Image not found with name: " + fileId));
         log.info("download imageData: {}", image);
 
         return ImageUtils.decompressImage(image.getImageData());

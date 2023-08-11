@@ -74,6 +74,9 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                     .build();
             Image image = imageService.uploadImage((MultipartFile) imageDto);
             supplierBoard.setImage(image);
+            supplierBoard.setImageId(image.getId());
+            supplierBoardDto.setImageId(image.getId());
+
         }
 //        if (supplierBoardDto.getImageData() != null) {
 //            supplierBoard.setImageData(supplierBoardDto.getImageData());
@@ -92,6 +95,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                 .supplier_id(savedSupplierBoard.getSupplier_id())
                 .createdDate(savedSupplierBoard.getCreatedDate())
                 .modifiedDate(savedSupplierBoard.getModifiedDate())
+                .imageId(savedSupplierBoard.getId())
                 .build();
     }
 
@@ -125,7 +129,8 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                     .imageData(supplierBoardDto.getImageData())
                     .build();
             Image image = imageService.uploadImage((MultipartFile) imageDto);
-//            supplierBoard.setImage(image);
+            supplierBoard.setImage(image);
+            supplierBoard.setImageId(image.getId());
         }
 
         supplierBoard.setModifiedDate(LocalDateTime.now());
@@ -142,6 +147,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                 .supplier_id(updatedSupplierBoard.getSupplier_id())
                 .createdDate(updatedSupplierBoard.getCreatedDate())
                 .modifiedDate(updatedSupplierBoard.getModifiedDate())
+                .imageId(updatedSupplierBoard.getId())
                 .build();
     }
 
