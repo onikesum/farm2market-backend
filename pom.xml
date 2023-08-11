@@ -57,6 +57,10 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.22</version> <!-- 적절한 버전으로 변경하세요 -->
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
