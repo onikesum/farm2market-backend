@@ -113,10 +113,11 @@ public class SignController {
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
     })
     @GetMapping("/find-password")
-    public ResponseEntity<String> findPasswordByPhoneNumber(
+    public ResponseEntity<String> findPasswordByPhoneNumberAndNameAndUid(
             @RequestParam String phoneNumber,
-            @RequestParam String name) {
-        String password = findUserService.findPasswordByPhoneNumberAndName(phoneNumber, name);
+            @RequestParam String name,
+            @RequestParam String uid) {
+        String password = findUserService.findPasswordByPhoneNumberAndNameAndUid(phoneNumber, name, uid);
         if (password != null) {
             return ResponseEntity.ok(password);
         } else {

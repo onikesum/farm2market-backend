@@ -24,8 +24,8 @@ public class FindUserServiceImpl implements FindUserService {
     }
 
     @Override
-    public String findPasswordByPhoneNumberAndName(String phoneNumber, String name) {
-        User user = userRepository.findByPhonenumberAndName(phoneNumber, name);
+    public String findPasswordByPhoneNumberAndNameAndUid(String phoneNumber, String name, String uid) {
+        User user = userRepository.findByPhonenumberAndNameAndUid(phoneNumber, name, uid);
         return (user != null) ? user.getPassword() : null;
     }
 }
