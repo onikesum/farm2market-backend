@@ -18,14 +18,14 @@ public class FindUserServiceImpl implements FindUserService {
     }
 
     @Override
-    public String findIdByPhoneNumber(String phoneNumber) {
-        User user = userRepository.findByPhonenumber(phoneNumber);
+    public String findIdByPhoneNumberAndName(String phoneNumber, String name) {
+        User user = userRepository.findByPhonenumberAndName(phoneNumber, name);
         return (user != null) ? user.getUid() : null;
     }
 
     @Override
-    public String findPasswordByPhoneNumber(String phoneNumber) {
-        User user = userRepository.findByPhonenumber(phoneNumber);
+    public String findPasswordByPhoneNumberAndNameAndUid(String phoneNumber, String name, String uid) {
+        User user = userRepository.findByPhonenumberAndNameAndUid(phoneNumber, name, uid);
         return (user != null) ? user.getPassword() : null;
     }
 }

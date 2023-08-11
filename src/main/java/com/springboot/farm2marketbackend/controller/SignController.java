@@ -99,8 +99,10 @@ public class SignController {
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
     })
     @GetMapping("/find-id")
-    public ResponseEntity<String> findIdByPhoneNumber(@RequestParam String phoneNumber) {
-        String id = findUserService.findIdByPhoneNumber(phoneNumber);
+    public ResponseEntity<String> findIdByPhoneNumber(
+            @RequestParam String phoneNumber,
+            @RequestParam String name) {
+        String id = findUserService.findIdByPhoneNumberAndName(phoneNumber, name);
         if (id != null) {
             return ResponseEntity.ok(id);
         } else {
@@ -111,8 +113,11 @@ public class SignController {
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
     })
     @GetMapping("/find-password")
-    public ResponseEntity<String> findPasswordByPhoneNumber(@RequestParam String phoneNumber) {
-        String password = findUserService.findPasswordByPhoneNumber(phoneNumber);
+    public ResponseEntity<String> findPasswordByPhoneNumberAndNameAndUid(
+            @RequestParam String phoneNumber,
+            @RequestParam String name,
+            @RequestParam String uid) {
+        String password = findUserService.findPasswordByPhoneNumberAndNameAndUid(phoneNumber, name, uid);
         if (password != null) {
             return ResponseEntity.ok(password);
         } else {
