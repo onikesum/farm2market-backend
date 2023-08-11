@@ -40,6 +40,7 @@ public class SellerBoardDto {
                 .product(product)
                 .price(price)
                 .keyword(keyword)
+                .imageId(imageId)
                 .createdDate(createdDate)
                 .modifiedDate(modifiedDate)
                 .build();

@@ -46,6 +46,7 @@ private ImageDto imageDto;
                 .price(price)
                 .keyword(keyword)
                 .supplier_id(supplier_id)
+                .imageId(imageId)
                 .createdDate(createdDate)
                 .modifiedDate(modifiedDate)
                 .build();
