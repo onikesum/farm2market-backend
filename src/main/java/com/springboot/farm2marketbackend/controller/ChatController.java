@@ -2,6 +2,8 @@ package com.springboot.farm2marketbackend.controller;
 
 import com.springboot.farm2marketbackend.data.dto.ChatRequest;
 import com.springboot.farm2marketbackend.data.dto.ChatResponse;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +32,10 @@ public class ChatController {
      * @param prompt the prompt to send to the API
      * @return first message from the API response
      */
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
     @GetMapping("/chat")
     public String chat(@RequestParam String prompt) {
         ChatRequest request = new ChatRequest(model, prompt);
