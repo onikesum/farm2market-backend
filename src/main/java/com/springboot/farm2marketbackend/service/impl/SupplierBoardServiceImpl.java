@@ -39,6 +39,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
         supplierBoardDto.setPrice(supplierBoard.getPrice());
         supplierBoardDto.setProduct(supplierBoard.getProduct());
         supplierBoardDto.setKeyword(supplierBoard.getKeyword());
+        supplierBoardDto.setIntroduction(supplierBoard.getIntroduction());
         supplierBoardDto.setSupplier_id(supplierBoard.getSupplier_id());
         supplierBoardDto.setCreatedDate(supplierBoard.getCreatedDate());
         supplierBoardDto.setModifiedDate(supplierBoard.getModifiedDate());
@@ -93,6 +94,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                 .price(savedSupplierBoard.getPrice())
                 .keyword(savedSupplierBoard.getKeyword())
                 .supplier_id(savedSupplierBoard.getSupplier_id())
+                .introduction(savedSupplierBoard.getIntroduction())
                 .createdDate(savedSupplierBoard.getCreatedDate())
                 .modifiedDate(savedSupplierBoard.getModifiedDate())
                 .imageId(savedSupplierBoard.getId())

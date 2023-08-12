@@ -1,5 +1,7 @@
 package com.springboot.farm2marketbackend.controller;
 
+import com.springboot.farm2marketbackend.data.dto.ChatRequest;
+import com.springboot.farm2marketbackend.data.dto.ChatResponse;
 import com.springboot.farm2marketbackend.data.dto.ImageDto;
 import com.springboot.farm2marketbackend.data.dto.SupplierBoardDto;
 import com.springboot.farm2marketbackend.data.entity.Image;
@@ -10,9 +12,12 @@ import com.springboot.farm2marketbackend.service.SupplierBoardService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +33,15 @@ import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 public class SupplierBoardController {
     final private SupplierBoardService supplierBoardService;
     final private ImageService imageService;
+    @Qualifier("openaiRestTemplate")
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${openai.model}")
+    private String model;
+
+    @Value("${openai.api.url}")
+    private String apiUrl;
 
     @Autowired
     public SupplierBoardController(SupplierBoardService supplierBoardService, ImageService imageService) {
@@ -48,7 +62,24 @@ public class SupplierBoardController {
             @RequestParam("supplier_id") Long supplier_id
     ) throws IOException {
         Image image = imageService.uploadImage(imageFile);
-        // SupplierBoardDto로부터 SupplierBoard 객체 생성
+
+        String prompt = String.format(
+                "제품명: %s, 가격: %d, 키워드: %s",
+                product, price, keyword
+        );
+        prompt += "앞의 정보를 가지고 농산물 소개하는 글을 5줄로 작성해줘";
+
+        ChatRequest request = new ChatRequest(model, prompt);
+
+        ChatResponse response = restTemplate.postForObject(
+                apiUrl,
+                request,
+                ChatResponse.class);
+
+        if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
         SupplierBoardDto supplierBoardDto = SupplierBoardDto.builder()
                 .name(name)
                 .product(product)
@@ -60,13 +91,15 @@ public class SupplierBoardController {
                 .imageId(image.getId())
                 .build();
 
-        // SupplierBoard와 Image를 저장
         supplierBoardDto.setImage(image);
+
+        String introduction = response.getChoices().get(0).getMessage().getContent();
+        LOGGER.info("Generated Introduction from GPT: " + introduction);
+        supplierBoardDto.setIntroduction(introduction); // Set the generated introduction to the DTO
         SupplierBoardDto savedSupplierBoardDto = supplierBoardService.saveSupplierBoard(supplierBoardDto, imageFile);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSupplierBoardDto);
     }
-
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
     })
