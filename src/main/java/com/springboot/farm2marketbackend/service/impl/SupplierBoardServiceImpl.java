@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Base64;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -41,7 +41,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
         supplierBoardDto.setKeyword(supplierBoard.getKeyword());
         supplierBoardDto.setIntroduction(supplierBoard.getIntroduction());
         supplierBoardDto.setTitle(supplierBoard.getTitle());
-        supplierBoardDto.setSupplier_id(supplierBoard.getSupplier_id());
+        supplierBoardDto.setUser_id(supplierBoard.getUser_id());
         supplierBoardDto.setCreatedDate(supplierBoard.getCreatedDate());
         supplierBoardDto.setModifiedDate(supplierBoard.getModifiedDate());
 
@@ -94,7 +94,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                 .product(savedSupplierBoard.getProduct())
                 .price(savedSupplierBoard.getPrice())
                 .keyword(savedSupplierBoard.getKeyword())
-                .supplier_id(savedSupplierBoard.getSupplier_id())
+                .user_id(savedSupplierBoard.getUser_id())
                 .introduction(savedSupplierBoard.getIntroduction())
                 .title(savedSupplierBoard.getTitle())
                 .createdDate(savedSupplierBoard.getCreatedDate())
@@ -150,7 +150,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                 .keyword(updatedSupplierBoard.getKeyword())
                 .introduction(updatedSupplierBoard.getIntroduction())
                 .title(updatedSupplierBoard.getTitle())
-                .supplier_id(updatedSupplierBoard.getSupplier_id())
+                .user_id(updatedSupplierBoard.getUser_id())
                 .createdDate(updatedSupplierBoard.getCreatedDate())
                 .modifiedDate(updatedSupplierBoard.getModifiedDate())
                 .imageId(updatedSupplierBoard.getId())
@@ -162,6 +162,11 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
     @Transactional
     public void deleteSupplierBoard(Long id) throws Exception {
         supplierBoardDAO.deleteSupplierBoard(id);
+    }
+
+    @Override
+    public List<SupplierBoard> getAllSupplierBoard() {
+        return supplierBoardDAO.getAllSupplierBoard();
     }
 
 }

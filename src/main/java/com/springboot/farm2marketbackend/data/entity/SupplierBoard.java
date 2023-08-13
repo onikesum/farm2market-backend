@@ -33,9 +33,11 @@ public class SupplierBoard {
 
     @Column(nullable = false)
     private String keyword;
-
-    @Column(nullable = false)
-    private Long supplier_id;
+    @OneToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+   @Column(name="user_id")
+   private Long user_id;
     @Column(length = 100)
     private String title;
     @Column(length = 1000)
