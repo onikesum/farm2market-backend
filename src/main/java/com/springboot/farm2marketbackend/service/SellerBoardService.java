@@ -13,5 +13,5 @@ public interface SellerBoardService {
     void deleteSellerBoard(Long id) throws Exception;
     SellerBoardDto getSellerBoard(Long id);
 
-    List<SellerBoard> getAllApplications();
+    List<SellerBoard> getAllSellerBoard();
 }

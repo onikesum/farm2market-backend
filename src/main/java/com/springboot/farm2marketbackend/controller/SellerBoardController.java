@@ -81,17 +81,8 @@ public class SellerBoardController {
 
         return ResponseEntity.status(HttpStatus.OK).body(sellerBoardDtoResponse);
     }
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
-    })
-    @GetMapping("/getAllSellerBoard")
-    public ResponseEntity<List<SellerBoard>> getAllSellerBoard(HttpServletRequest request)
-    {
-        List<SellerBoard> sellerBoardResponse = sellerBoardService.getAllApplications();
-        LOGGER.info("호출 API: " + "get all frontend applications" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
 
-        return ResponseEntity.status(HttpStatus.OK).body(sellerBoardResponse);
-    }
+
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
     })
@@ -129,5 +120,13 @@ public class SellerBoardController {
         LOGGER.info("호출 API: " + "delete SellerBoard" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
 
         return ResponseEntity.status(HttpStatus.OK).body("성공적으로 삭제 되었습니다.");
+    }
+    @GetMapping("/getAllSellerBoard")
+    public ResponseEntity<List<SellerBoard>> getAllSellerBoard()
+    {
+        List<SellerBoard> sellerBoardResponse = sellerBoardService.getAllSellerBoard();
+        LOGGER.info("호출 API: " + "get all frontend applications" + " 접속자 IP: " + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(sellerBoardResponse);
     }
 }

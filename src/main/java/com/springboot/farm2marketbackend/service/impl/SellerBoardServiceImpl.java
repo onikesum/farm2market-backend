@@ -71,7 +71,6 @@ public class SellerBoardServiceImpl implements SellerBoardService {
                     .name(sellerBoardDto.getImageName())
                     .imgType(sellerBoardDto.getImageType())
                     .imageData(sellerBoardDto.getImageData())
-                    .seller_id(sellerBoard.getId())
                     .build();
             Image image = imageService.uploadImage((MultipartFile) imageDto);
             sellerBoard.setImage(image);
@@ -121,7 +120,6 @@ public class SellerBoardServiceImpl implements SellerBoardService {
                     .name(sellerBoardDto.getImageName())
                     .imgType(sellerBoardDto.getImageType())
                     .imageData(sellerBoardDto.getImageData())
-                    .seller_id(sellerBoard.getId())
                     .build();
             Image image = imageService.uploadImage((MultipartFile) imageDto);
             sellerBoard.setImage(image);
@@ -152,7 +150,7 @@ public class SellerBoardServiceImpl implements SellerBoardService {
         sellerBoardDAO.deleteSellerBoard(id);
     }
     @Override
-    public List<SellerBoard> getAllApplications() {
+    public List<SellerBoard> getAllSellerBoard() {
         return sellerBoardDAO.getAllSellerBoard();
     }
 

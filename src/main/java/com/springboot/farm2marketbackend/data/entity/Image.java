@@ -1,5 +1,6 @@
 package com.springboot.farm2marketbackend.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.springboot.farm2marketbackend.service.SellerBoardService;
 import lombok.*;
 
@@ -19,10 +20,7 @@ public class Image {
 
     private String name;
     private String imgType;
-    @OneToOne(mappedBy = "image", cascade = CascadeType.ALL)
-    private SupplierBoard supplierBoard;
-    @OneToOne(mappedBy = "image", cascade = CascadeType.ALL)
-    private SellerBoard sellerBoard;
+
     @Lob
     @Column
     private byte[] imageData;
