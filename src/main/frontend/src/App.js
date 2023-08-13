@@ -13,7 +13,7 @@ import Findid from "./component/project/find/findid";
 import Findpassword from "./component/project/find/findpassword";
 import Findresultid from "./component/project/find/findid/result";
 import Findresultpass from "./component/project/find/findpassword/result";
-import Aiwriting from "./component/project/writing/aiwriting/aiwriting";
+import Sellerwriting from "./component/project/writing/aiwriting/sellerwriting";
 import "./App.css";
 import Header from "./component/project/header/header";
 import { Provider,useDispatch } from 'react-redux';
@@ -39,7 +39,7 @@ function App() {
                         <Route path="/findpass" element={<Findpassword />} />
                         <Route path="/findid/result" element={<Findresultid />} />
                         <Route path="/findpass/result" element={<Findresultpass />} />
-                        <Route path="/aiwriting" element={<Aiwriting />} />
+                        <Route path="/seller/wirte" element={<Sellerwriting />} />
                     </Routes>
                 </BrowserRouter>
             </Provider>

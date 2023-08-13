@@ -48,7 +48,7 @@ const Agriboard = () => {
           <Title>농산물 가격 정보</Title>
           <ButtonContainer>
             <Link
-                to="/aiwriting"
+                to="/seller/wirte"
             >
               <Button>
                 <svg
