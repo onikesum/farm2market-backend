@@ -68,15 +68,19 @@ public class SupplierBoardController {
                 product, price, keyword
         );
         prompt += "앞의 정보를 가지고 농산물 소개하는 글을 5줄로 작성해줘";
-
+        String prompt2 = prompt+"이 농산물 소개글을 바탕으로 간단하고 사람들의 관심을 끌 수 있는 글 제목을 만들어주는데 공백포함 60자 이하로 만들어줘";
         ChatRequest request = new ChatRequest(model, prompt);
-
+        ChatRequest request1 = new ChatRequest(model, prompt2);
         ChatResponse response = restTemplate.postForObject(
                 apiUrl,
                 request,
                 ChatResponse.class);
-
-        if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
+        ChatResponse titleResponse = restTemplate.postForObject(
+                apiUrl,
+                request1,
+                ChatResponse.class);
+        if (response == null || response.getChoices() == null || response.getChoices().isEmpty()
+        || titleResponse.getChoices()==null ||titleResponse.getChoices().isEmpty()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
@@ -96,6 +100,9 @@ public class SupplierBoardController {
         String introduction = response.getChoices().get(0).getMessage().getContent();
         LOGGER.info("Generated Introduction from GPT: " + introduction);
         supplierBoardDto.setIntroduction(introduction); // Set the generated introduction to the DTO
+        String title = titleResponse.getChoices().get(0).getMessage().getContent();
+        LOGGER.info("Generated title from GPT: " + title);
+        supplierBoardDto.setTitle(title);
         SupplierBoardDto savedSupplierBoardDto = supplierBoardService.saveSupplierBoard(supplierBoardDto, imageFile);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSupplierBoardDto);

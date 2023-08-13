@@ -32,6 +32,7 @@ public class SupplierBoardDto {
     private LocalDateTime createdDate;
 
     private LocalDateTime modifiedDate;
+    private String title;
     private String introduction;
     private Image image;
     private Long imageId;
@@ -50,6 +51,7 @@ private ImageDto imageDto;
                 .keyword(keyword)
                 .supplier_id(supplier_id)
                 .imageId(imageId)
+                .title(title)
                 .introduction(introduction)
                 .createdDate(createdDate)
                 .modifiedDate(modifiedDate)

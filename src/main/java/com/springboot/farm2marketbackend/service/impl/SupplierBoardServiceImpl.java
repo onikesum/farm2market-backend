@@ -40,6 +40,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
         supplierBoardDto.setProduct(supplierBoard.getProduct());
         supplierBoardDto.setKeyword(supplierBoard.getKeyword());
         supplierBoardDto.setIntroduction(supplierBoard.getIntroduction());
+        supplierBoardDto.setTitle(supplierBoard.getTitle());
         supplierBoardDto.setSupplier_id(supplierBoard.getSupplier_id());
         supplierBoardDto.setCreatedDate(supplierBoard.getCreatedDate());
         supplierBoardDto.setModifiedDate(supplierBoard.getModifiedDate());
@@ -95,6 +96,7 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                 .keyword(savedSupplierBoard.getKeyword())
                 .supplier_id(savedSupplierBoard.getSupplier_id())
                 .introduction(savedSupplierBoard.getIntroduction())
+                .title(savedSupplierBoard.getTitle())
                 .createdDate(savedSupplierBoard.getCreatedDate())
                 .modifiedDate(savedSupplierBoard.getModifiedDate())
                 .imageId(savedSupplierBoard.getId())
@@ -146,6 +148,8 @@ public class SupplierBoardServiceImpl implements SupplierBoardService {
                 .product(updatedSupplierBoard.getProduct())
                 .price(updatedSupplierBoard.getPrice())
                 .keyword(updatedSupplierBoard.getKeyword())
+                .introduction(updatedSupplierBoard.getIntroduction())
+                .title(updatedSupplierBoard.getTitle())
                 .supplier_id(updatedSupplierBoard.getSupplier_id())
                 .createdDate(updatedSupplierBoard.getCreatedDate())
                 .modifiedDate(updatedSupplierBoard.getModifiedDate())
