@@ -5,6 +5,7 @@ import com.springboot.farm2marketbackend.data.dto.ImageDto;
 import com.springboot.farm2marketbackend.data.dto.SellerBoardDto;
 import com.springboot.farm2marketbackend.data.entity.Image;
 import com.springboot.farm2marketbackend.data.entity.SellerBoard;
+import com.springboot.farm2marketbackend.data.entity.SupplierBoard;
 import com.springboot.farm2marketbackend.service.ImageService;
 import com.springboot.farm2marketbackend.service.SellerBoardService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Slf4j
 @Service
 public class SellerBoardServiceImpl implements SellerBoardService {
@@ -148,5 +151,10 @@ public class SellerBoardServiceImpl implements SellerBoardService {
     public void deleteSellerBoard(Long id) throws Exception {
         sellerBoardDAO.deleteSellerBoard(id);
     }
+    @Override
+    public List<SellerBoard> getAllApplications() {
+        return sellerBoardDAO.getAllSellerBoard();
+    }
+
 
 }

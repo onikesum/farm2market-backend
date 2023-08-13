@@ -28,7 +28,7 @@ public class SupplierBoardDto {
 
     private String keyword;
 
-    private Long supplier_id;
+    private Long user_id;
     private LocalDateTime createdDate;
 
     private LocalDateTime modifiedDate;
@@ -49,7 +49,7 @@ private ImageDto imageDto;
                 .product(product)
                 .price(price)
                 .keyword(keyword)
-                .supplier_id(supplier_id)
+                .user_id(user_id)
                 .imageId(imageId)
                 .title(title)
                 .introduction(introduction)

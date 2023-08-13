@@ -9,6 +9,8 @@ import com.springboot.farm2marketbackend.data.entity.SupplierBoard;
 import com.springboot.farm2marketbackend.data.entity.SupplierBoardAndImageResponse;
 import com.springboot.farm2marketbackend.service.ImageService;
 import com.springboot.farm2marketbackend.service.SupplierBoardService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.List;
 
 import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 
@@ -55,12 +58,18 @@ public class SupplierBoardController {
     @PostMapping
     public ResponseEntity<SupplierBoardDto> createSupplierBoard(
             @RequestParam("file") MultipartFile imageFile,
-            @RequestParam("name") String name,
             @RequestParam("product") String product,
             @RequestParam("price") Long price,
             @RequestParam("keyword") String keyword,
-            @RequestParam("supplier_id") Long supplier_id
+            HttpServletRequest request
     ) throws IOException {
+        //토큰 추출
+        String token = request.getHeader("X-AUTH-TOKEN");
+        //토큰 디코딩
+        Claims claims = Jwts.parser().setSigningKey("your_secret_key_here").parseClaimsJws(token).getBody();
+        String userName = claims.getSubject(); //사용자이름 추출
+        Long userId = Long.parseLong(claims.get("userId").toString());
+
         Image image = imageService.uploadImage(imageFile);
 
         String prompt = String.format(
@@ -69,15 +78,15 @@ public class SupplierBoardController {
         );
         prompt += "앞의 정보를 가지고 농산물 소개하는 글을 5줄로 작성해줘";
         String prompt2 = prompt+"이 농산물 소개글을 바탕으로 간단하고 사람들의 관심을 끌 수 있는 글 제목을 만들어주는데 공백포함 60자 이하로 만들어줘";
-        ChatRequest request = new ChatRequest(model, prompt);
-        ChatRequest request1 = new ChatRequest(model, prompt2);
+        ChatRequest request1 = new ChatRequest(model, prompt);
+        ChatRequest request2 = new ChatRequest(model, prompt2);
         ChatResponse response = restTemplate.postForObject(
                 apiUrl,
-                request,
+                request1,
                 ChatResponse.class);
         ChatResponse titleResponse = restTemplate.postForObject(
                 apiUrl,
-                request1,
+                request2,
                 ChatResponse.class);
         if (response == null || response.getChoices() == null || response.getChoices().isEmpty()
         || titleResponse.getChoices()==null ||titleResponse.getChoices().isEmpty()) {
@@ -85,11 +94,11 @@ public class SupplierBoardController {
         }
 
         SupplierBoardDto supplierBoardDto = SupplierBoardDto.builder()
-                .name(name)
+                .name(userName)
                 .product(product)
                 .price(price)
                 .keyword(keyword)
-                .supplier_id(supplier_id)
+                .user_id(userId)
                 .createdDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
                 .imageId(image.getId())
@@ -106,6 +115,17 @@ public class SupplierBoardController {
         SupplierBoardDto savedSupplierBoardDto = supplierBoardService.saveSupplierBoard(supplierBoardDto, imageFile);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSupplierBoardDto);
+    }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
+    @GetMapping("/getAllSupplierBoard")
+    public ResponseEntity<List<SupplierBoard>> getAllSupplierBoard(HttpServletRequest request)
+    {
+        List<SupplierBoard> supplierBoardResponse = supplierBoardService.getAllSupplierBoard();
+        LOGGER.info("호출 API: " + "get all frontend applications" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(supplierBoardResponse);
     }
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
@@ -162,4 +182,5 @@ public class SupplierBoardController {
 
         return ResponseEntity.status(HttpStatus.OK).body("성공적으로 삭제 되었습니다.");
     }
+
 }

@@ -2,6 +2,7 @@ package com.springboot.farm2marketbackend.controller;
 
 import com.springboot.farm2marketbackend.data.dto.SellerBoardDto;
 import com.springboot.farm2marketbackend.data.entity.Image;
+import com.springboot.farm2marketbackend.data.entity.SellerBoard;
 import com.springboot.farm2marketbackend.service.ImageService;
 import com.springboot.farm2marketbackend.service.SellerBoardService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.List;
 
 import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 
@@ -30,8 +32,6 @@ public class SellerBoardController {
         this.sellerBoardService = sellerBoardService;
         this.imageService = imageService;
     }
-
-
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
@@ -80,6 +80,17 @@ public class SellerBoardController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(sellerBoardDtoResponse);
+    }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
+    @GetMapping("/getAllSellerBoard")
+    public ResponseEntity<List<SellerBoard>> getAllSellerBoard(HttpServletRequest request)
+    {
+        List<SellerBoard> sellerBoardResponse = sellerBoardService.getAllApplications();
+        LOGGER.info("호출 API: " + "get all frontend applications" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(sellerBoardResponse);
     }
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
