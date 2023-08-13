@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/")
 public class QuestionController {
@@ -105,6 +107,13 @@ public class QuestionController {
                 System.currentTimeMillis() - currentTime);
 
         return ResponseEntity.status(HttpStatus.OK).body("정상적으로 삭제되었습니다.");
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        List<Question> questions = questionService.getAllQuestions();
+
+        return ResponseEntity.status(HttpStatus.OK).body(questions);
     }
 
 }
