@@ -27,7 +27,7 @@ const Signup = () => {
                     name: data.name, // 이름 입력 값
                     password: data.password, // 비밀번호 입력 값
                     phonenumber: data.phoneNumber, // 휴대폰 번호 입력 값
-                    role: 'user',
+                    role: 'ADMIN',
                 },
             })
             .then((response) => {

@@ -12,18 +12,25 @@ import {
 import { Nav, NavItem } from "../header/component";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
+import {setToken} from "../../../redux/auth";
 
 const Signin = () => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+    const token = useSelector(state => state.token);
+
     const onSubmit = (e) => {
         e.preventDefault();
 
+
         axios.post(`/sign-api/sign-in?id=${id}&password=${password}`)
             .then((response) => {
-                console.log('Response data:', response.data);
                 console.log('로그인 성공!');
-                console.log('로그인 결과:', response.data);
+                console.log('로그인 결과:', response.data.token);
+                dispatch(setToken(response.data.token));
             })
             .catch((error) => {
                 console.log('Request failed:', error);
