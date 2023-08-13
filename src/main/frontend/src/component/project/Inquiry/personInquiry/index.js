@@ -6,6 +6,7 @@ import {
   ButtonContainer,
   Button,
 } from "../../../emotion/component";
+import {Link} from "react-router-dom";
 const PersonalInquiry = () => {
   const OuterContainer = styled.div`
     display: flex;
@@ -90,7 +91,9 @@ const PersonalInquiry = () => {
         <OuterContainer>
           <Title>개인 문의 내용</Title>
           <ButtonContainer>
-            <Button>글쓰기</Button>
+            <Link to={ "/Inquiry/wirte"}>
+              <Button>글쓰기</Button>
+            </Link>
             <Button>내가쓴글</Button>
           </ButtonContainer>
         </OuterContainer>

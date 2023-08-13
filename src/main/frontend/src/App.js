@@ -14,6 +14,7 @@ import Findpassword from "./component/project/find/findpassword";
 import Findresultid from "./component/project/find/findid/result";
 import Findresultpass from "./component/project/find/findpassword/result";
 import Sellerwriting from "./component/project/writing/aiwriting/sellerwriting";
+import Inquirywriting from "./component/project/writing/aiwriting/Inquirywriting";
 import "./App.css";
 import Header from "./component/project/header/header";
 import { Provider,useDispatch } from 'react-redux';
@@ -40,6 +41,7 @@ function App() {
                         <Route path="/findid/result" element={<Findresultid />} />
                         <Route path="/findpass/result" element={<Findresultpass />} />
                         <Route path="/seller/wirte" element={<Sellerwriting />} />
+                        <Route path="/Inquiry/wirte" element={<Inquirywriting />} />
                     </Routes>
                 </BrowserRouter>
             </Provider>
