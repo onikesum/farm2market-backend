@@ -101,7 +101,7 @@ public class QuestionController {
         long currentTime = System.currentTimeMillis();
         LOGGER.info("[deleteQuestion] request Data :: questionId : {}", id);
 
-        questionService.deleteQuestion(id);
+//        questionService.deleteQuestion(id);
 
         LOGGER.info("[deleteProduct] response Time : {}ms",
                 System.currentTimeMillis() - currentTime);
