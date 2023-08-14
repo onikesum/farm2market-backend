@@ -2,15 +2,13 @@ package com.springboot.farm2marketbackend.controller;
 
 import com.springboot.farm2marketbackend.data.dto.ChatRequest;
 import com.springboot.farm2marketbackend.data.dto.ChatResponse;
-import com.springboot.farm2marketbackend.data.dto.ImageDto;
 import com.springboot.farm2marketbackend.data.dto.SupplierBoardDto;
 import com.springboot.farm2marketbackend.data.entity.Image;
 import com.springboot.farm2marketbackend.data.entity.SupplierBoard;
-import com.springboot.farm2marketbackend.data.entity.SupplierBoardAndImageResponse;
+import com.springboot.farm2marketbackend.data.entity.User;
+import com.springboot.farm2marketbackend.repository.UserRepository;
 import com.springboot.farm2marketbackend.service.ImageService;
 import com.springboot.farm2marketbackend.service.SupplierBoardService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -36,6 +35,7 @@ import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 public class SupplierBoardController {
     final private SupplierBoardService supplierBoardService;
     final private ImageService imageService;
+    final private UserRepository userRepository;
     @Qualifier("openaiRestTemplate")
     @Autowired
     private RestTemplate restTemplate;
@@ -47,9 +47,10 @@ public class SupplierBoardController {
     private String apiUrl;
 
     @Autowired
-    public SupplierBoardController(SupplierBoardService supplierBoardService, ImageService imageService) {
+    public SupplierBoardController(SupplierBoardService supplierBoardService, ImageService imageService, UserRepository userRepository) {
         this.supplierBoardService = supplierBoardService;
         this.imageService = imageService;
+        this.userRepository = userRepository;
     }
 
     @ApiImplicitParams({
@@ -63,12 +64,6 @@ public class SupplierBoardController {
             @RequestParam("keyword") String keyword,
             HttpServletRequest request
     ) throws IOException {
-        //토큰 추출
-        String token = request.getHeader("X-AUTH-TOKEN");
-        //토큰 디코딩
-        Claims claims = Jwts.parser().setSigningKey("your_secret_key_here").parseClaimsJws(token).getBody();
-        String userName = claims.getSubject(); //사용자이름 추출
-        Long userId = Long.parseLong(claims.get("userId").toString());
 
         Image image = imageService.uploadImage(imageFile);
 
@@ -76,8 +71,8 @@ public class SupplierBoardController {
                 "제품명: %s, 가격: %d, 키워드: %s",
                 product, price, keyword
         );
-        prompt += "앞의 정보를 가지고 농산물 소개하는 글을 5줄로 작성해줘";
-        String prompt2 = prompt+"이 농산물 소개글을 바탕으로 간단하고 사람들의 관심을 끌 수 있는 글 제목을 만들어주는데 공백포함 60자 이하로 만들어줘";
+        prompt += "앞의 정보를 가지고 농산물 소개글을 3줄 작성해줘";
+        String prompt2 = "\""+prompt+"\""+"이 농산물 소개글을 바탕으로 글 제목을 만들어주는데 공백포함 60자 이하로 만들어줘. 글자제한 엄수해줘";
         ChatRequest request1 = new ChatRequest(model, prompt);
         ChatRequest request2 = new ChatRequest(model, prompt2);
         ChatResponse response = restTemplate.postForObject(
@@ -92,13 +87,20 @@ public class SupplierBoardController {
         || titleResponse.getChoices()==null ||titleResponse.getChoices().isEmpty()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userUid = authentication.getName();        // id찾기
+        User user = userRepository.findByUid(userUid);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        Long userId = user.getId();
+        String userName = user.getName();
         SupplierBoardDto supplierBoardDto = SupplierBoardDto.builder()
+                .user_id(userId)
                 .name(userName)
                 .product(product)
                 .price(price)
                 .keyword(keyword)
-                .user_id(userId)
                 .createdDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
                 .imageId(image.getId())

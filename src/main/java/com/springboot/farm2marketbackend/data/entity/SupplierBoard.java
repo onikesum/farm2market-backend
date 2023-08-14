@@ -39,7 +39,7 @@ public class SupplierBoard {
     private User user;
    @Column(name="user_id")
    private Long user_id;
-    @Column(length = 100)
+    @Column(length = 1000)
     private String title;
     @Column(length = 1000)
     private String introduction;
