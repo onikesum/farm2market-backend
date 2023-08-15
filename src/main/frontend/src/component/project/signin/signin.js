@@ -13,7 +13,7 @@ import { Nav, NavItem } from "../header/component";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
-import {setToken} from "../../../redux/auth";
+import {setResponseData, setToken} from "../../../redux/auth";
 
 const Signin = () => {
     const [id, setId] = useState('');
@@ -21,6 +21,7 @@ const Signin = () => {
 
     const dispatch = useDispatch();
     const token = useSelector(state => state.token);
+    const responseData = useSelector(state => state.responseData);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -30,7 +31,9 @@ const Signin = () => {
             .then((response) => {
                 console.log('로그인 성공!');
                 console.log('로그인 결과:', response.data.token);
+                console.log('유저 정보:', response.data);
                 dispatch(setToken(response.data.token));
+                dispatch(setResponseData(response.data));
             })
             .catch((error) => {
                 console.log('Request failed:', error);

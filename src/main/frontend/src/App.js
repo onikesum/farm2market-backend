@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Provider } from 'react-redux';
+import {store, persistor } from "./redux/store";
+import { PersistGate } from 'redux-persist/integration/react';
 import Main from "./component/project/main/main";
 import Mypage from "./component/project/mypage/mypage";
 import Signin from "./component/project/signin/signin";
@@ -17,13 +20,11 @@ import Sellerwriting from "./component/project/writing/aiwriting/sellerwriting";
 import Inquirywriting from "./component/project/writing/aiwriting/Inquirywriting";
 import "./App.css";
 import Header from "./component/project/header/header";
-import { Provider,useDispatch } from 'react-redux';
-import store from './redux/store';
 
 function App() {
     return (
-        <div>
-            <Provider store={store}>
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
                 <BrowserRouter>
                     <Header/>
                     <Routes>
@@ -44,8 +45,8 @@ function App() {
                         <Route path="/Inquiry/wirte" element={<Inquirywriting />} />
                     </Routes>
                 </BrowserRouter>
-            </Provider>
-        </div>
+            </PersistGate>
+        </Provider>
     );
 }
 
