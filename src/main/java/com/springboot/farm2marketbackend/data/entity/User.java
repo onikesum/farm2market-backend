@@ -38,6 +38,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String phonenumber;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private SupplierBoard supplierBoard;
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList();

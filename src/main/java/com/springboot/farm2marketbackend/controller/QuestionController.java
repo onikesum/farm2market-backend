@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/")
 public class QuestionController {
@@ -27,7 +29,9 @@ public class QuestionController {
     public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
     }
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 access_token", required = true, dataType = "String", paramType = "header")
+    })
 
     @GetMapping()
     public ResponseEntity<QuestionResponseDto> getQuestion(Long id) {
@@ -97,12 +101,19 @@ public class QuestionController {
         long currentTime = System.currentTimeMillis();
         LOGGER.info("[deleteQuestion] request Data :: questionId : {}", id);
 
-        questionService.deleteQuestion(id);
+//        questionService.deleteQuestion(id);
 
         LOGGER.info("[deleteProduct] response Time : {}ms",
                 System.currentTimeMillis() - currentTime);
 
         return ResponseEntity.status(HttpStatus.OK).body("정상적으로 삭제되었습니다.");
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        List<Question> questions = questionService.getAllQuestions();
+
+        return ResponseEntity.status(HttpStatus.OK).body(questions);
     }
 
 }

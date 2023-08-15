@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 @Builder
+@Getter
+@Setter
 public class SupplierBoardDto {
     private Long id;
 
@@ -26,10 +28,12 @@ public class SupplierBoardDto {
 
     private String keyword;
 
-    private Long supplier_id;
+    private Long user_id;
     private LocalDateTime createdDate;
 
     private LocalDateTime modifiedDate;
+    private String title;
+    private String introduction;
     private Image image;
     private Long imageId;
 
@@ -45,8 +49,10 @@ private ImageDto imageDto;
                 .product(product)
                 .price(price)
                 .keyword(keyword)
-                .supplier_id(supplier_id)
+                .user_id(user_id)
                 .imageId(imageId)
+                .title(title)
+                .introduction(introduction)
                 .createdDate(createdDate)
                 .modifiedDate(modifiedDate)
                 .build();

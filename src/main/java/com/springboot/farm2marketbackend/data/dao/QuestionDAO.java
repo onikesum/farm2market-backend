@@ -10,5 +10,5 @@ public interface QuestionDAO {
     Question updateQuestion(Long id, String content) throws Exception;
 
     void deleteQuestion(Long id) throws Exception;
-//    List<Question> getAllApplication();
+    List<Question> getAllQuestions();
 }

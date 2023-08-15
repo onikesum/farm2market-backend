@@ -16,6 +16,6 @@ public interface QuestionService {
 
     void deleteQuestion(Long id) throws Exception;
 
-//    List<Question> getAllApplications();
+    List<Question> getAllQuestions();
 
 }

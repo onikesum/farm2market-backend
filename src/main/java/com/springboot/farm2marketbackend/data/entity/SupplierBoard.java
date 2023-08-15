@@ -1,5 +1,6 @@
 package com.springboot.farm2marketbackend.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -33,15 +34,21 @@ public class SupplierBoard {
 
     @Column(nullable = false)
     private String keyword;
-
-    @Column(nullable = false)
-    private Long supplier_id;
+    @OneToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+   @Column(name="user_id")
+   private Long user_id;
+    @Column(length = 1000)
+    private String title;
+    @Column(length = 1000)
+    private String introduction;
     @Column(name = "image_id") // image_id 컬럼 추가
     private Long imageId; // 이미지와의 연결을 위한 외래키
     @Lob
     @Column
     private byte[] imageData; // 이미지 데이터
-
+    @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "image_id", insertable = false, updatable = false)
     private Image image;

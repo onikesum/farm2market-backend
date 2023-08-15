@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -70,4 +71,9 @@ public class SupplierBoardDAOImpl implements SupplierBoardDAO {
             throw new Exception();
         }
     }
+    @Override
+    public List<SupplierBoard> getAllSupplierBoard() {
+        return supplierBoardRepository.findAll();
+    }
+
 }

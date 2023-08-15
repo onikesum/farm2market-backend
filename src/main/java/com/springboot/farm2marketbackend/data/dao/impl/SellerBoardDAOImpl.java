@@ -2,11 +2,13 @@ package com.springboot.farm2marketbackend.data.dao.impl;
 
 import com.springboot.farm2marketbackend.data.dao.SellerBoardDAO;
 import com.springboot.farm2marketbackend.data.entity.SellerBoard;
+import com.springboot.farm2marketbackend.data.entity.SupplierBoard;
 import com.springboot.farm2marketbackend.repository.SellerBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -70,4 +72,9 @@ public class SellerBoardDAOImpl implements SellerBoardDAO {
             throw new Exception();
         }
     }
+    @Override
+    public List<SellerBoard> getAllSellerBoard() {
+        return sellerBoardRepository.findAll();
+    }
+
 }
