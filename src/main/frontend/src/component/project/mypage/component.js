@@ -19,15 +19,12 @@ export const Title = styled.div`
   display: inline-flex;
 `;
 export const InnerContainer = styled.div`
-  width: 1606px;
-  height: 805px;
-  flex-shrink: 0;
+  width: 100rem;
+  height: auto;
   display: flex;
   border-radius: 15px;
   background: #f8f9e3;
-  flex-direction: row;
-  margin: 147px;
-  margin-top: 50px;
+  margin-bottom: 10rem;
 `;
 
 export const LeftContainer = styled.div`

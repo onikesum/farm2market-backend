@@ -336,7 +336,25 @@ export const Inners = ({ children }) => (
           align-items: start;
           padding: 0rem 9.1875rem;
           box-sizing:border-box;
-          gap: 51rem;
+          margin-top: 50px;
+          gap: 5rem;
+    `}
+    >
+        {children}
+    </div>
+);
+export const Inners2 = ({ children }) => (
+    <div
+        css={css`
+          overflow-x: hidden;
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          box-sizing:border-box;
+          gap: 5rem;
+          
     `}
     >
         {children}
@@ -473,3 +491,11 @@ export const Cblock = ({ width, background, color, children }) => (
         {children}
     </div>
 );
+
+export const OuterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 101.625rem;  
+`;

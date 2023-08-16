@@ -13,17 +13,21 @@ import {
     SearchBar,
     LoginButton,
 } from "./component";
-
+import mast from "../../../img/main/Frame.svg"
 const Header = () => {
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
-
+    const [isBottomNavActive, setBottomNavActive] = useState(false);
+    const handleLogoClick = () => {
+        setBottomNavActive(!isBottomNavActive);
+    };
     return (
-        <HeaderContainer
-            onMouseEnter={() => setDropdownVisible(true)}
-            onMouseLeave={() => setDropdownVisible(false)}
-        >
+        <HeaderContainer>
             <Logo>
-                <img src={menuLogo} alt="menuLogo" />
+                <Link to={"/"}>
+                    <img src={mast} width="50px" height="50px" alt="Mast" />
+                </Link>
+                <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+                    <img src={menuLogo} alt="menuLogo" />
+                </div>
             </Logo>
             <Nav>
                 <NavItem as={Link} to="/proboard">
@@ -39,7 +43,7 @@ const Header = () => {
                     마이페이지
                 </NavItem>
             </Nav>
-            {isDropdownVisible && (
+            {isBottomNavActive && (
                 <DropdownMenu>
                     <DropNav>
                         <DropNavGroup>
@@ -72,11 +76,9 @@ const Header = () => {
                 </DropdownMenu>
             )}
             <SearchBar placeholder="검색어를 입력하세요" />
-            <Nav>
-                <NavItem as={Link} to="/signin">
+
                     <LoginButton>로그인</LoginButton>
-                </NavItem>
-            </Nav>
+
         </HeaderContainer>
     );
 };

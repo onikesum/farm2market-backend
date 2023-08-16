@@ -43,7 +43,7 @@ const Proboard = () => {
           <Title>판매자 게시판</Title>
           <ButtonContainer>
             <Link
-                to="/seller/wirte"
+                to="/provider/wirte"
             >
               <Button>
                 <svg

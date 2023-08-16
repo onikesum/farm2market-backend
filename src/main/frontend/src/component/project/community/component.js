@@ -1,12 +1,6 @@
 import styled from "@emotion/styled";
 
-export const IndexContainer = styled.div`
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin-top: 3 00px;
-`;
+
 
 export const InnerContainer = styled.div`
   margin-top: 50px;
@@ -46,8 +40,7 @@ export const OuterContainer = styled.div`
 `;
 
 export const TableContainer = styled.div`
-  margin-top: 40px;
-  padding: 0 147px;
+
   table {
     width: 100%;
     border-collapse: collapse;

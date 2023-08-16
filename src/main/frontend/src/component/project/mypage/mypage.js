@@ -1,7 +1,8 @@
 import React from "react";
-import { InnerContainer, Title, LeftContainer } from "./component";
+import { InnerContainer,  LeftContainer } from "./component";
 import {
   CustomRightContainer,
+  Title,
   TopSection,
   BottomSection,
   SideContent,
@@ -11,13 +12,17 @@ import {
   Usertitle,
   Mybutton,
   MyLoge,
+
 } from "./component";
-import SvgWithMargin, { Inners, Rowplace } from "../../emotion/component";
+import SvgWithMargin, { Inners, Rowplace,OuterContainer } from "../../emotion/component";
 
 const Mypage = () => {
   return (
       <Inners>
-        <Title>마이페이지</Title>
+        <OuterContainer>
+          <Title>마이페이지</Title>
+        </OuterContainer>
+
         <InnerContainer>
           <LeftContainer>
             <SvgWithMargin />

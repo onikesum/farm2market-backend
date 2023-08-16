@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import {
-  OuterContainer,
-  FootContainer,
-} from "./component";
+
 import {
   ProjectBox2,
   Title,
   Inner,
   ButtonContainer,
+  OuterContainer,
+  FootContainer,
   Button, Inners, InblockContainer,
 } from "../../../emotion/component";
 import test3 from "../../../../json/test3.json";
