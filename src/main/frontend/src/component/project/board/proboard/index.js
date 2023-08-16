@@ -6,7 +6,7 @@ import {
   ProjectBox,
   Title,
   Inner,
-  FootContainer, ButtonContainer,
+  FootContainer, ButtonContainer, Inners, InblockContainer,
 } from "../../../emotion/component";
 import test from "../../../../json/test.json";
 import {Link} from "react-router-dom";
@@ -38,7 +38,7 @@ const Proboard = () => {
   };
   return (
     <>
-      <Container>
+      <Inners>
         <OuterContainer>
           <Title>판매자 게시판</Title>
           <ButtonContainer>
@@ -91,8 +91,7 @@ const Proboard = () => {
             </Button>
           </ButtonContainer>
         </OuterContainer>
-        <IndexContainer>
-          <InnerContainer>
+        <InblockContainer>
             <Inner>
               {currentItems &&
                 currentItems.map((project) => (
@@ -105,8 +104,7 @@ const Proboard = () => {
                   />
                 ))}
             </Inner>
-          </InnerContainer>
-        </IndexContainer>
+        </InblockContainer>
         <FootContainer>
           <Button onClick={handlePrevPage}>
             <svg
@@ -140,7 +138,7 @@ const Proboard = () => {
             </svg>
           </Button>
         </FootContainer>
-      </Container>
+      </Inners>
     </>
   );
 };

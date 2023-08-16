@@ -5,7 +5,6 @@ export const IndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 300px;
 `;
 
 export const InnerContainer = styled.div`
@@ -42,6 +41,7 @@ export const OuterContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  width: 101.625rem;  
 `;
 
 export const FootContainer = styled.div`

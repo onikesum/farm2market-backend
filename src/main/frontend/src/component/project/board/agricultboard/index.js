@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import {
-  IndexContainer,
-  InnerContainer,
   OuterContainer,
   FootContainer,
 } from "./component";
 import {
-  Container,
   ProjectBox2,
   Title,
   Inner,
   ButtonContainer,
-  Button,
+  Button, Inners, InblockContainer,
 } from "../../../emotion/component";
 import test3 from "../../../../json/test3.json";
 import {Link} from "react-router-dom";
@@ -43,7 +40,7 @@ const Agriboard = () => {
   };
   return (
     <>
-      <Container>
+      <Inners>
         <OuterContainer>
           <Title>농산물 가격 정보</Title>
           <ButtonContainer>
@@ -96,8 +93,7 @@ const Agriboard = () => {
             </Button>
           </ButtonContainer>
         </OuterContainer>
-        <IndexContainer>
-          <InnerContainer>
+        <InblockContainer>
             <Inner>
               {currentItems &&
                 currentItems.map((project) => (
@@ -109,8 +105,7 @@ const Agriboard = () => {
                   />
                 ))}
             </Inner>
-          </InnerContainer>
-        </IndexContainer>
+        </InblockContainer>
         <FootContainer>
           <Button onClick={handlePrevPage}>
             <svg
@@ -144,7 +139,7 @@ const Agriboard = () => {
             </svg>
           </Button>
         </FootContainer>
-      </Container>
+      </Inners>
     </>
   );
 };

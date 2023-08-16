@@ -16,7 +16,6 @@ import SvgWithMargin, { Inners, Rowplace } from "../../emotion/component";
 
 const Mypage = () => {
   return (
-    <>
       <Inners>
         <Title>마이페이지</Title>
         <InnerContainer>
@@ -138,7 +137,6 @@ const Mypage = () => {
           </CustomRightContainer>
         </InnerContainer>
       </Inners>
-    </>
   );
 };
 export default Mypage;

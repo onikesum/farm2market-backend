@@ -219,8 +219,8 @@ export const IndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  width: 1920px;
-  height: 100vh;
+  width: 100%;
+  height: auto;
 `;
 export const Rowplace = ({ children }) => (
     <div
@@ -260,31 +260,24 @@ export const Container = styled.div`
   background-color: #fff;
   display: flex;
   width: 1920px;
-  height: 100vh;
+  padding: 0px 9rem;
+  height: auto;
   flex-direction: column;
-  overflow-y: auto;
+  background-color: #282c34;
 `;
 
 export const Title = styled.div`
   color: #000;
-  font-feature-settings: "clig" off, "liga" off;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 1.2; /* 55.556% */
   border-left: 5px black solid;
   padding-left: 20px;
-  margin-left: 147px;
-  margin-top: 80px;
   display: inline-flex;
+  ${theme.textVariants.body7_bold};
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-  margin-right: 147px;
-  margin-top: 80px;
 `;
 
 export const Button = styled.div`
@@ -310,18 +303,19 @@ export const Button = styled.div`
 `;
 
 export const Inner = styled.div`
-  width: 100%;
+  width: 120rem;
   display: flex;
-  gap: 80px;
+  gap: 5rem;
   flex-wrap: wrap;
-  margin-top: 300px;
+  overflow-x: hidden;
 `;
 export const FootContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 350px;
-  margin-bottom: 200px;
+  width: 100%;
+  gap: 1rem;
+  margin: 3rem 0rem;
 `;
 
 export const StyledLinkNavItem = styled(Link)`
@@ -334,11 +328,28 @@ export const StyledLinkNavItem = styled(Link)`
 export const Inners = ({ children }) => (
     <div
         css={css`
-      width: 120rem;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
+          overflow-x: hidden;
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          padding: 0rem 9.1875rem;
+          box-sizing:border-box;
+          gap: 51rem;
+    `}
+    >
+        {children}
+    </div>
+);
+export const InblockContainer = ({ children }) => (
+    <div
+        css={css`
+          width: 120rem;
+          display: flex;
+          gap: 5rem;
+          flex-wrap: wrap;
+          overflow-x: hidden;
     `}
     >
         {children}
@@ -434,6 +445,7 @@ export const CheckContainer = ({ children }) => (
       align-items: start;
       position: relative;
       left: 200px;
+          
       gap: 2rem;
     `}
     >

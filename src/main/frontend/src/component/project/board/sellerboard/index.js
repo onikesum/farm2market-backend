@@ -1,18 +1,16 @@
 import React, {useEffect, useState} from "react";
-import { IndexContainer, InnerContainer } from "./component";
 import {
   Button,
-  Container,
   ProjectBox,
   Title,
-  Inner,
-  FootContainer, ButtonContainer,
+  FootContainer,
+  ButtonContainer,
+  Inners,
+  InblockContainer,
 } from "../../../emotion/component";
-import test2 from "../../../../json/test2.json";
-import {OuterContainer} from "../agricultboard/component";
 import {Link} from "react-router-dom";
 import axios from "axios";
-const Proboard = () => {
+const Sellerboard = () => {
   const [Array,setArray] = useState([]);
 
   useEffect(() => {
@@ -52,8 +50,7 @@ const Proboard = () => {
   };
 
   return (
-    <>
-      <Container>
+      <Inners>
         <OuterContainer>
           <Title>공급자 게시판</Title>
           <ButtonContainer>
@@ -106,35 +103,30 @@ const Proboard = () => {
             </Button>
           </ButtonContainer>
         </OuterContainer>
-        <IndexContainer>
-          <InnerContainer>
-
-            <Inner>
+            <InblockContainer>
               {currentItems &&
-                currentItems.map((project) => (
-                  <ProjectBox
-                    key={project.id}
-                    title={project.name}
-                    content={project.product}
-                    tags={[project.keyword]}
-                    imageSrc={project.imageData}
-                  />
-                ))}
-            </Inner>
-          </InnerContainer>
-        </IndexContainer>
+                  currentItems.map((project) => (
+                      <ProjectBox
+                          key={project.id}
+                          title={project.name}
+                          content={project.product}
+                          tags={[project.keyword]}
+                          imageSrc={project.imageData}
+                      />
+                  ))}
+            </InblockContainer>
         <FootContainer>
           <Button onClick={handlePrevPage}>
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
             >
               <path
-                d="M8.1649 12.3704L14.7953 18.8001C15.2091 19.2013 16 18.9581 16 18.4297V5.5703C16 5.0419 15.2091 4.7987 14.7953 5.1999L8.1649 11.6296C7.945 11.8427 7.9451 12.1573 8.1649 12.3704Z"
-                fill="white"
+                  d="M8.1649 12.3704L14.7953 18.8001C15.2091 19.2013 16 18.9581 16 18.4297V5.5703C16 5.0419 15.2091 4.7987 14.7953 5.1999L8.1649 11.6296C7.945 11.8427 7.9451 12.1573 8.1649 12.3704Z"
+                  fill="white"
               />
             </svg>
             이전 페이지
@@ -143,22 +135,21 @@ const Proboard = () => {
           <Button onClick={handleNextPage}>
             다음 페이지
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
             >
               <path
-                d="M15.8351 11.6296L9.20467 5.1999C8.79094 4.79869 8 5.04189 8 5.5703V18.4297C8 18.9581 8.79094 19.2013 9.20467 18.8001L15.8351 12.3704C16.055 12.1573 16.0549 11.8427 15.8351 11.6296Z"
-                fill="white"
+                  d="M15.8351 11.6296L9.20467 5.1999C8.79094 4.79869 8 5.04189 8 5.5703V18.4297C8 18.9581 8.79094 19.2013 9.20467 18.8001L15.8351 12.3704C16.055 12.1573 16.0549 11.8427 15.8351 11.6296Z"
+                  fill="white"
               />
             </svg>
           </Button>
         </FootContainer>
-      </Container>
-    </>
+      </Inners>
   );
 };
 
-export default Proboard;
+export default Sellerboard;

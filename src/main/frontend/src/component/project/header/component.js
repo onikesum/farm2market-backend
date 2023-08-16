@@ -4,13 +4,13 @@ import searchslideLogo from "../../../img/header/searchslideLogo.svg";
 
 export const HeaderContainer = styled.header`
   position: relative;
-  width: 1920px;
+  width: 100%;
   height: 66px;
   background-color: #76c56f;
   display: flex;
   align-items: center;
-  margin: 0 auto;
   margin-bottom: 50px;
+  box-sizing:border-box;
 `;
 
 export const Logo = styled.div`

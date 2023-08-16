@@ -3,7 +3,7 @@ import {
   Container,
   Title,
   ButtonContainer,
-  Button,
+  Button, Inners,
 } from "../../emotion/component";
 import { OuterContainer, TableContainer } from "./component";
 const Community = () => {
@@ -38,7 +38,7 @@ const Community = () => {
 
   return (
     <>
-      <Container>
+      <Inners>
         <OuterContainer>
           <Title>커뮤니티</Title>
           <ButtonContainer>
@@ -93,7 +93,7 @@ const Community = () => {
             />
           </svg>
         </Button>
-      </Container>
+      </Inners>
     </>
   );
 };

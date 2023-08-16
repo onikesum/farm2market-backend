@@ -5,19 +5,9 @@ export const IndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 3 00px;
 `;
 
-export const InnerContainer = styled.div`
-  margin-top: 50px;
-  width: 1626px;
-  height: 701px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  border-radius: 30px;
-  justify-content: center;
-`;
+
 export const SignButton = styled.div`
   width: 636px;
   height: 77px;
@@ -38,9 +28,3 @@ export const SignButton = styled.div`
   margin-top: 30px;
 `;
 
-export const OuterContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-`;

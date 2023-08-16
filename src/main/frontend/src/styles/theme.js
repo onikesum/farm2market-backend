@@ -72,6 +72,18 @@ const theme = {
             "font-weight": "700",
             "letter-spacing": "-0.042rem",
         },
+        body7: {
+            "font-family": "Inter",
+            "font-size": "36px",
+            "font-weight": "500",
+            "letter-spacing": "-0.042rem",
+        },
+        body7_bold: {
+            "font-family": "Inter",
+            "font-size": "36px",
+            "font-weight": "900",
+            "letter-spacing": "-0.042rem",
+        },
     },
     palette: {
         primary: {
