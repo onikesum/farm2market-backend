@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import searchLogo from "../../../img/header/searchLogo.svg";
 import searchslideLogo from "../../../img/header/searchslideLogo.svg";
+import theme from "../../../styles/theme";
 
 export const HeaderContainer = styled.header`
   position: relative;
@@ -55,17 +56,18 @@ export const SearchBar = styled.input.attrs({
   background-position: 10px center, calc(100% - 10px) center;
   background-repeat: no-repeat, no-repeat;
   box-sizing: border-box;
-  width: 25%;
+  width: 20%;
   
 `;
 
 export const LoginButton = styled.div`
-  width: 70px;
+  width: 9rem;
   height: 33px;
   flex-shrink: 0;
   border-radius: 55px;
   border: 1px solid #fff;
   color: white;
+  ${theme.textVariants.body8_bold};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,4 +107,5 @@ export const DropItem = styled.a`
   text-decoration: none;
   height: 31px;
   margin: 10px 0;
+  ${theme.textVariants.body8_bold};
 `;

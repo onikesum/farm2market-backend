@@ -45,7 +45,6 @@ function Inquirywriting() {
   return (
       <IndexContainer>
         <WritingBox>
-          <button onClick={check}>테스트1</button>
           <InputTitle placeholder="글 제목" value={title} onChange={handleTitleChange} />
           <InputContent placeholder="글 내용" value={content} onChange={handleContentChange} />
           <UploadButton2>

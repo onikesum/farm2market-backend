@@ -84,6 +84,18 @@ const theme = {
             "font-weight": "900",
             "letter-spacing": "-0.042rem",
         },
+        body8: {
+            "font-family": "Inter",
+            "font-size": "16px",
+            "font-weight": "500",
+            "letter-spacing": "-0.042rem",
+        },
+        body8_bold: {
+            "font-family": "Inter",
+            "font-size": "16px",
+            "font-weight": "900",
+            "letter-spacing": "-0.042rem",
+        },
         head1: {
             "font-family": "Inter",
             "font-size": "64px",

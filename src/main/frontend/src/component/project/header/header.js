@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import menuLogo from "../../../img/header/menuLogo.svg";
-import { Link } from "react-router-dom"; // react-router-dom 라이브러리 추가
+import { Link, useNavigate } from "react-router-dom";
 import {
     HeaderContainer,
     Logo,
@@ -16,9 +16,22 @@ import {
 import mast from "../../../img/main/Frame.svg"
 const Header = () => {
     const [isBottomNavActive, setBottomNavActive] = useState(false);
+    const navigate = useNavigate();
+
     const handleLogoClick = () => {
         setBottomNavActive(!isBottomNavActive);
     };
+
+    useEffect(() => {
+        // 페이지 전환 시 자동으로 isBottomNavActive를 false로 설정
+        setBottomNavActive(false);
+    }, [navigate]);
+
+    const handleNavItemClick = (path) => {
+        setBottomNavActive(false);
+        navigate(path); // 해당 path로 페이지 이동
+    };
+
     return (
         <HeaderContainer>
             <Logo>
@@ -76,9 +89,9 @@ const Header = () => {
                 </DropdownMenu>
             )}
             <SearchBar placeholder="검색어를 입력하세요" />
-
-                    <LoginButton>로그인</LoginButton>
-
+            <Link to={"/signin" }>
+                <LoginButton>로그인</LoginButton>
+            </Link>
         </HeaderContainer>
     );
 };

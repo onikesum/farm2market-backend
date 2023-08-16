@@ -77,7 +77,7 @@ const Main = () => {
                             <BoardLinktexth3>농작물을 팔 수 있는</BoardLinktexth3>
                             <BoardLinktexth1>판매자라면?</BoardLinktexth1>
                         </BoardLinkTextbox>
-                        <Link to={'/proboard'}>
+                        <Link to={'/sellerboard'}>
                             <BoardLinkButton>여기 클릭!</BoardLinkButton>
                         </Link>
                     </BoardLinkSeller>
