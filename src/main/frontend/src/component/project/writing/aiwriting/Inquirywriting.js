@@ -27,6 +27,9 @@ function Inquirywriting() {
       title: title
     };
 
+    const on = () => {
+      console.log(token);
+    }
     axios.post('/', questionDto, {
       headers: {
         'X-AUTH-TOKEN': token,

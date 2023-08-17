@@ -21,11 +21,10 @@ const Signin = () => {
 
     const dispatch = useDispatch();
     const token = useSelector(state => state.token);
-    const responseData = useSelector(state => state.responseData);
 
     const onclick = () => {
         console.log(
-            token + " 그리고 " + responseData
+            token
         )
     }
     const navigate = useNavigate();
@@ -86,7 +85,6 @@ const Signin = () => {
                         >
                             아이디/비밀번호 찾기
                         </Link>
-                        <button onClick={onclick}>테스트 데이터</button>
                     </Signcheck>
                 </InnerContainer>
             </IndexContainer>

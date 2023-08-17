@@ -74,6 +74,7 @@ function Sellerwriting() {
       <IndexContainer>
         <WritingArea>
           <InputArea>
+            <button onClick={check}>테스트 데이터</button>
             <InputH1>
               온라인 등록을 위해 간단한 정보를 입력해주세요!
               <br />

@@ -14,11 +14,13 @@ import {
     LoginButton,
 } from "./component";
 import mast from "../../../img/main/Frame.svg"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logOut} from "../../../redux/auth";
 const Header = () => {
     const [isBottomNavActive, setBottomNavActive] = useState(false);
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogoClick = () => {
         setBottomNavActive(!isBottomNavActive);
@@ -27,6 +29,9 @@ const Header = () => {
     useEffect(() => {
         setBottomNavActive(false);
     }, [navigate]);
+    const handleLogout = () => {
+        dispatch(logOut());
+    };
 
 
     return (
@@ -83,9 +88,17 @@ const Header = () => {
                 </DropdownMenu>
             )}
             <SearchBar placeholder="검색어를 입력하세요" />
-            <Link to={"/signin" }>
-                <LoginButton>{isLoggedIn ? "로그아웃" : "로그인"}</LoginButton>
-            </Link>
+
+                {isLoggedIn ?
+                    <Link to={"/" }>
+                        <LoginButton onClick={handleLogout}>로그아웃</LoginButton>
+                    </Link>
+                    :
+                    <Link to={"/signin" }>
+                        <LoginButton>로그인</LoginButton>
+                    </Link>
+                }
+
         </HeaderContainer>
     );
 };
