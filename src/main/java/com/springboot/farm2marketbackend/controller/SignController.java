@@ -45,13 +45,14 @@ public class SignController {
     @PostMapping(value = "/sign-in")
     public SignInResultDto signIn(
             @ApiParam(value = "ID", required = true) @RequestParam String id,
-            @ApiParam(value = "Password", required = true) @RequestParam String password)
+            @ApiParam(value = "Password", required = true) @RequestParam String password,
+            @ApiParam(value = "Name", required = true) @RequestParam String name)
             throws RuntimeException {
         LOGGER.info("[signIn] 로그인을 시도하고 있습니다. id : {}, pw : ****", id);
         SignInResultDto signInResultDto = signService.signIn(id, password);
 
         if (signInResultDto.getCode() == 0) {
-            LOGGER.info("[signIn] 정상적으로 로그인되었습니다. id : {}, token : {}", id,
+            LOGGER.info("[signIn] 정상적으로 로그인되었습니다. name : {}, id : {}, token : {}", name, id,
                     signInResultDto.getToken());
         }
         return signInResultDto;
