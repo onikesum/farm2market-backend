@@ -1,6 +1,7 @@
 package com.springboot.farm2marketbackend.service.impl;
 
 import java.util.Collections;
+import java.util.List;
 
 import com.springboot.farm2marketbackend.common.CommonResponse;
 import com.springboot.farm2marketbackend.config.security.JwtTokenProvider;
@@ -72,6 +73,8 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public SignInResultDto signIn(String id, String password) throws RuntimeException {
+
+
         LOGGER.info("[getSignInResult] signDataHandler 로 회원 정보 요청");
         User user = userRepository.getByUid(id);
         LOGGER.info("[getSignInResult] Id : {}", id);
@@ -86,10 +89,12 @@ public class SignServiceImpl implements SignService {
         SignInResultDto signInResultDto = SignInResultDto.builder()
                 .token(jwtTokenProvider.createToken(String.valueOf(user.getUid()),
                         user.getRoles()))
+                .name(user.getName())
                 .build();
 
         LOGGER.info("[getSignInResult] SignInResultDto 객체에 값 주입");
         setSuccessResult(signInResultDto);
+
 
         return signInResultDto;
     }
@@ -106,6 +111,9 @@ public class SignServiceImpl implements SignService {
         result.setSuccess(false);
         result.setCode(CommonResponse.FAIL.getCode());
         result.setMsg(CommonResponse.FAIL.getMsg());
+    }
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 
 }
