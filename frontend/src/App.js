@@ -17,8 +17,10 @@ import Findpassword from "./component/project/find/findpassword";
 import Findresultid from "./component/project/find/findid/result";
 import Findresultpass from "./component/project/find/findpassword/result";
 import Sellerwriting from "./component/project/writing/aiwriting/sellerwriting";
-import Prowriting from "./component/project/writing/aiwriting/supplierwriting";
 import Inquirywriting from "./component/project/writing/aiwriting/Inquirywriting";
+import SellDetail from "./component/project/board/sellerboard/selldetail/selldetail";
+import Sellupdate from './component/project/board/sellerboard/sellupdate/sellupdate';
+
 import "./App.css";
 import Header from "./component/project/header/header";
 
@@ -35,6 +37,7 @@ function App() {
                         <Route path="/signup" element={<Signup />} />
                         <Route path="/proboard" element={<Proboard />} />
                         <Route path="/sellerboard" element={<Sellerboard />} />
+                        <Route path="/sellerboard/selldetail/:id" element={<SellDetail/>} />
                         <Route path="/agriboard" element={<Agriboard />} />
                         <Route path="/community" element={<Community />} />
                         <Route path="/Inquiry/personal" element={<PersonalInquiry />} />
@@ -43,8 +46,8 @@ function App() {
                         <Route path="/findid/result" element={<Findresultid />} />
                         <Route path="/findpass/result" element={<Findresultpass />} />
                         <Route path="/seller/wirte" element={<Sellerwriting />} />
-                        <Route path="/provider/wirte" element={<Prowriting />} />
                         <Route path="/Inquiry/wirte" element={<Inquirywriting />} />
+                        <Route path="/sellerboard/selldetail/:id/sellupdate" element={<Sellupdate/>} />
                     </Routes>
                 </BrowserRouter>
             </PersistGate>

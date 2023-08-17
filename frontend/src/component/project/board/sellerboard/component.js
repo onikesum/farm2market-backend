@@ -16,8 +16,6 @@ export const SignButton = styled.div`
   background: #3a6e67;
   color: #fff;
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -27,4 +25,3 @@ export const SignButton = styled.div`
   align-items: center;
   margin-top: 30px;
 `;
-
