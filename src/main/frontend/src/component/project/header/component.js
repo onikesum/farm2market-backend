@@ -1,36 +1,40 @@
 import styled from "styled-components";
 import searchLogo from "../../../img/header/searchLogo.svg";
 import searchslideLogo from "../../../img/header/searchslideLogo.svg";
+import theme from "../../../styles/theme";
 
 export const HeaderContainer = styled.header`
   position: relative;
   width: 100%;
-  height: 66px;
+  height: 4.25rem;
   background-color: #76c56f;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  margin-bottom: 50px;
-  box-sizing:border-box;
+  justify-content: space-between;
 `;
 
 export const Logo = styled.div`
-  margin-left: 147px;
-  margin-top: 5px;
+  margin-left: 4rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 10%;
+  gap: 2rem;
 `;
 
 export const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 910px;
-  margin-left: 87px;
+  width: 56.875rem;
+  margin-left: 5.5rem;
 `;
 
 export const NavItem = styled.a`
   color: #fff;
-  width: 179px;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
+  width: 10rem;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
@@ -41,7 +45,6 @@ export const NavItem = styled.a`
 export const SearchBar = styled.input.attrs({
     type: "text",
 })`
-  width: 333px;
   height: 33px;
   flex-shrink: 0;
   border-radius: 4px;
@@ -53,27 +56,31 @@ export const SearchBar = styled.input.attrs({
   background-position: 10px center, calc(100% - 10px) center;
   background-repeat: no-repeat, no-repeat;
   box-sizing: border-box;
+  width: 20%;
+  
 `;
 
 export const LoginButton = styled.div`
-  width: 70px;
+  width: 9rem;
   height: 33px;
   flex-shrink: 0;
   border-radius: 55px;
   border: 1px solid #fff;
   color: white;
+  ${theme.textVariants.body8_bold};
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   font-size: 14px;
   margin-left: 55px;
+  margin-right: 4rem;
 `;
 
 export const DropdownMenu = styled.div`
   position: absolute;
-  top: 66px;
-  width: 1920px;
+  top: 60px;
+  width: 100%;
   left: 0;
   height: 210px;
   background-color: #76c56f;
@@ -82,17 +89,16 @@ export const DropdownMenu = styled.div`
 
 export const DropNav = styled.nav`
   display: flex;
-  justify-content: space-between;
-  width: 914px;
   background-color: #76c56f;
-  margin-left: 254px;
+  margin-left: 18rem;
+  gap: 6.3rem;
 `;
 
 export const DropNavGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 37px;
-  width: 179px;
+  width: 140px;
   background-color: #76c56f;
 `;
 
@@ -101,4 +107,5 @@ export const DropItem = styled.a`
   text-decoration: none;
   height: 31px;
   margin: 10px 0;
+  ${theme.textVariants.body8_bold};
 `;

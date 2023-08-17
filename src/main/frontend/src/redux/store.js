@@ -5,9 +5,8 @@ import authReducer from './auth';
 
 // redux-persist 구성
 const persistConfig = {
-    key: 'root', // 저장 키
-    storage, // 사용할 스토리지
-    whitelist: ['authReducer'], // 유지할 리듀서 목록
+    key: 'root',
+    storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
