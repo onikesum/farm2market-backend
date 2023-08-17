@@ -325,7 +325,7 @@ export const StyledLinkNavItem = styled(Link)`
   }
 `;
 
-export const Inners = ({ children }) => (
+export const Inners = ({ gap = '5rem', children }) => (
     <div
         css={css`
           overflow-x: hidden;
@@ -335,10 +335,10 @@ export const Inners = ({ children }) => (
           flex-direction: column;
           align-items: start;
           padding: 0rem 9.1875rem;
-          box-sizing:border-box;
+          box-sizing: border-box;
           margin-top: 50px;
-          gap: 5rem;
-    `}
+          gap: ${gap};
+        `}
     >
         {children}
     </div>

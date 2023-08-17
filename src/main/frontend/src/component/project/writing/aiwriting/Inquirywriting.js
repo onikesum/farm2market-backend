@@ -47,7 +47,7 @@ function Inquirywriting() {
         <WritingBox>
           <InputTitle placeholder="글 제목" value={title} onChange={handleTitleChange} />
           <InputContent placeholder="글 내용" value={content} onChange={handleContentChange} />
-          <UploadButton2>
+          <UploadButton2 onClick={check}>
             업로드
           </UploadButton2>
         </WritingBox>

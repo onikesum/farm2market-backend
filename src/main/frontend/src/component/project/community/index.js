@@ -17,27 +17,16 @@ const Community = () => {
         .then(response => {
           const dataArray = response.data; // Assuming the response data is an array
           setArray(dataArray);
-          console.log(dataArray);
         })
         .catch(error => {
           console.error('Error fetching data:', error);
         });
   }, []);
-
-  const handleTitleChange = (index, value) => {
-    setArray((prevData) =>
-      prevData.map((item, i) =>
-        index === i ? { ...item, title: value } : item
-      )
-    );
-  };
-
-  const handleAuthorChange = (index, value) => {
-    setArray((prevData) =>
-      prevData.map((item, i) =>
-        index === i ? { ...item, author: value } : item
-      )
-    );
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
   };
 
   return (
@@ -64,20 +53,10 @@ const Community = () => {
               {Array.map((item, index) => (
                 <tr key={index}>
                   <td>
-                    <input
-                      type="text"
-                      value={item.title}
-                      onChange={(e) => handleTitleChange(index, e.target.value)}
-                    />
+                    <div>{truncateText(item.title, 30)}</div>
                   </td>
                   <td>
-                    <input
-                      type="text"
-                      value={item.author}
-                      onChange={(e) =>
-                        handleAuthorChange(index, e.target.value)
-                      }
-                    />
+                    <div>{truncateText(item.author, 30)}</div>
                   </td>
                 </tr>
               ))}

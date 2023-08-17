@@ -14,8 +14,10 @@ import {
     LoginButton,
 } from "./component";
 import mast from "../../../img/main/Frame.svg"
+import {useSelector} from "react-redux";
 const Header = () => {
     const [isBottomNavActive, setBottomNavActive] = useState(false);
+    const isLoggedIn = useSelector(state => state.isLoggedIn);
     const navigate = useNavigate();
 
     const handleLogoClick = () => {
@@ -23,14 +25,9 @@ const Header = () => {
     };
 
     useEffect(() => {
-        // 페이지 전환 시 자동으로 isBottomNavActive를 false로 설정
         setBottomNavActive(false);
     }, [navigate]);
 
-    const handleNavItemClick = (path) => {
-        setBottomNavActive(false);
-        navigate(path); // 해당 path로 페이지 이동
-    };
 
     return (
         <HeaderContainer>
@@ -81,16 +78,13 @@ const Header = () => {
                             </DropItem>
                         </DropNavGroup>
                         <DropNavGroup>
-                            <DropItem as={Link} to="/info">
-                                정보 수정
-                            </DropItem>
                         </DropNavGroup>
                     </DropNav>
                 </DropdownMenu>
             )}
             <SearchBar placeholder="검색어를 입력하세요" />
             <Link to={"/signin" }>
-                <LoginButton>로그인</LoginButton>
+                <LoginButton>{isLoggedIn ? "로그아웃" : "로그인"}</LoginButton>
             </Link>
         </HeaderContainer>
     );

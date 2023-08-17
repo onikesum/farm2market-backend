@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import theme from "../../../styles/theme";
 
 
 
@@ -63,14 +64,15 @@ export const TableContainer = styled.div`
     td {
       height: 60px;
     }
-    input {
+    div {
       width: 100%;
       height: 100%;
       border: none;
       background: transparent;
       color: #000;
-      font-family: Inter;
-      font-size: 14px;
+      display: flex;
+      align-items: center;
+      ${theme.textVariants.body5_bold}
     }
   }
 `;
