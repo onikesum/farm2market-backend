@@ -17,7 +17,9 @@ import mast from "../../../img/main/Frame.svg"
 import {useDispatch, useSelector} from "react-redux";
 import {logOut} from "../../../redux/auth";
 const Header = () => {
+
     const [isBottomNavActive, setBottomNavActive] = useState(false);
+    const responseData = useSelector(state => state.responseData);
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -54,9 +56,14 @@ const Header = () => {
                 <NavItem as={Link} to="/community">
                     커뮤니티
                 </NavItem>
+                {isLoggedIn ?
                 <NavItem as={Link} to="/mypage">
                     마이페이지
-                </NavItem>
+                </NavItem> :
+                    <NavItem>
+                        마이페이지
+                    </NavItem>
+                }
             </Nav>
             {isBottomNavActive && (
                 <DropdownMenu>
@@ -91,7 +98,7 @@ const Header = () => {
 
                 {isLoggedIn ?
                     <Link to={"/" }>
-                        <LoginButton onClick={handleLogout}>로그아웃</LoginButton>
+                        <LoginButton onClick={handleLogout}>{responseData.name} 로그아웃</LoginButton>
                     </Link>
                     :
                     <Link to={"/signin" }>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { InnerContainer,  LeftContainer } from "./component";
 import {
   CustomRightContainer,
@@ -20,8 +20,36 @@ import {setResponseData, setToken} from "../../../redux/auth";
 import {useSelector} from "react-redux";
 
 const Mypage = () => {
+  const responseData = useSelector(state => state.responseData);
   const token = useSelector(state => state.token);
+  const [Array,setArray] = useState([]);
+  const [Objects, setObjects] = useState([]);
+  const [Name, setName] = useState('');
+  const [Number, setNumber] = useState('');
+  const [Role,setRole] = useState('');
+  const getMatch = (data,name)=> {
+    return data.filter(item => item.name === name);
+  }
+  
+  useEffect(() => {
+    axios.get(`/mypage-api/all-users`,{
+      headers: {
+        'X-AUTH-TOKEN': token,
+      },
+    })
+        .then((response) => {
+          setArray(response.data);
+          const matchedObjects = getMatch(Array, responseData.name);
+          setObjects(matchedObjects);
+          const name = Objects.map((obj) => obj.name);
+          console.log("이름은" + name);
+        })
+        .catch((error) => {
+          console.log('Request failed:', error);
+        });
+  }, []);
   const onClick = () => {
+
     axios.post(`/sign-api/logout`,null,{
       headers: {
         'X-AUTH-TOKEN': token,
@@ -35,6 +63,7 @@ const Mypage = () => {
           console.log('로그 아웃 에러:', error);
         });
   }
+
   return (
       <Inners>
         <OuterContainer>
@@ -44,7 +73,7 @@ const Mypage = () => {
         <InnerContainer>
           <LeftContainer>
             <SvgWithMargin />
-            <Usertitle>ㅇㅇㅇ 님</Usertitle>
+            <Usertitle>ddd 님</Usertitle>
             <p>농산물 공급자 회원</p>
             <Mybutton>개인 정보 수정</Mybutton>
             <Mybutton onClick={onClick}>로그아웃</Mybutton>

@@ -4,7 +4,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         token: '',
-        responseData: {},
+        responseData: '',
         ID: '',
         isLoggedIn: false,
     },
@@ -22,6 +22,7 @@ const authSlice = createSlice({
         logOut: (state, action) => {
             state.ID = '';
             state.token = '';
+            state.responseData = '';
             state.isLoggedIn = false;
         },
     },
