@@ -24,12 +24,15 @@ const Main = () => {
     const [isAnimated, setIsAnimated] = useState(false);
 
     const animateElement = () => {
-        const element = document.querySelector(".price-area");
+        const element = document.querySelector(".first-area");
         const windowHeight = window.innerHeight;
         const elementTop = element.getBoundingClientRect().top;
 
         if (elementTop < windowHeight * 0.8) {
             setIsAnimated(true);
+        }
+        else{
+            setIsAnimated(false);
         }
     };
     const handleScroll = () => {
@@ -50,7 +53,7 @@ const Main = () => {
             <TopBannerArea>
                 <TextContainer>
                     <TextHeader>
-                        <img src={mast} />
+                        <img src={mast}  alt={mast}/>
                         <Texth1>
                             팜투마켓
                         </Texth1>
@@ -62,7 +65,7 @@ const Main = () => {
             </TopBannerArea>
             <img src={StyledHr} />
                 <BoardLinktexth2>간단하게 온라인 등록하기!</BoardLinktexth2>
-                <BoardLinkgroup className="price-area">
+                <BoardLinkgroup className="first-area">
                     <BoardLinkprovider isAnimated={isAnimated} >
                         <BoardLinkTextbox>
                             <BoardLinktexth3>농작물을 제공할 수 있는</BoardLinktexth3>

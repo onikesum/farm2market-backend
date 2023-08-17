@@ -40,9 +40,6 @@ export const LeftContainer = styled.div`
   justify-items: center;
   align-items: center;
   color: #fff;
-  text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
   ${theme.textVariants.body1}
 `;
 export const RightContainer = styled.div`
@@ -59,7 +56,7 @@ export const Head = styled.div`
   margin-top: 3rem;
 `;
 export const HeadTitle = styled.div`
-  ${theme.textVariants.heading2}
+  ${theme.textVariants.head2}
 `;
 export const Body = styled.div``;
 export const BodyTitle = styled.div`
@@ -102,10 +99,6 @@ export const SideContent = styled.div`
   padding: 0px;
   text-align: center;
   color: #fff;
-  text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
-  font-family: 210 OmniGothic;
   ${theme.textVariants.body1}
   display: flex;
   align-items: center;
@@ -120,8 +113,6 @@ export const Pagebox = styled.div`
   flex-direction: column;
   color: #276322;
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
   margin-bottom: 0px;
   ${theme.textVariants.body2_bold}
 `;
@@ -129,8 +120,6 @@ export const SvgWithMargin = styled.div``;
 
 export const PageboxText = styled.div`
   color: #000;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
   ${theme.textVariants.body4_bold}
 `;
 export const Mytitle = styled.p`
@@ -138,8 +127,6 @@ export const Mytitle = styled.p`
   margin-bottom: 68px;
   ${theme.textVariants.body3_bold}
   color: #2f6c29;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
 `;
 
 export const Usertitle = styled.p`
@@ -148,8 +135,6 @@ export const Usertitle = styled.p`
   ${theme.textVariants.body3_bold}
   color: #FFF;
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
 `;
 export const Mybutton = styled.div`
   display: flex;
@@ -159,23 +144,18 @@ export const Mybutton = styled.div`
   background: #fff;
   color: #266f1f;
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
   width: 201px;
   height: 50px;
   margin: 20px auto;
-  text-align: center;
+  cursor: pointer;
 `;
 
 export const MyLoge = styled.div`
   color: #fff;
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  text-shadow: 0px 4px 4px 0px rgba(38, 51, 36, 0.54);
-  font-family: 210 OmniGothic;
   font-size: 64px;
   font-style: normal;
   font-weight: 900;
