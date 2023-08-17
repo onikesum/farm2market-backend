@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from "../../../../styles/theme";
 
 export const IndexContainer = styled.div`
   width: 1920px;
@@ -240,13 +241,17 @@ export const OutputTitle = styled.input`
     border-radius: 5px;
     background: #FFF;
     margin-top: 20px;
+  ${theme.textVariants.body5_bold}
 `;
 
-export const OutputContent = styled.input`
+export const OutputContent = styled.textarea`
     width: 811px;
-    height: 488px;
+  max-width: 100%;
+  height: 488px;
     border: none;
     margin-top: 20px;
+  white-space: normal;
+${theme.textVariants.body6_bold}
 `;
 
 export const UploadButton = styled.div`

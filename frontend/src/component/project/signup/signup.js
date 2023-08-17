@@ -10,6 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
+import {SignButton} from "./component";
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Signup = () => {
     return (
         <>
             <Inners>
-                <InnerContainer width={"50rem"}>
+                <InnerContainer width={"45rem"}>
                     <SignTitle>회원가입!</SignTitle>
                     {/* 폼 제출 시 onSubmit 함수 호출 */}
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -107,10 +108,7 @@ const Signup = () => {
                                     <SignP>{errors.phoneNumber.message}</SignP>
                                 )}
                             </div>
-
-                            <div>
-                                <button type="submit">가입 하기</button>
-                            </div>
+                            <SignButton>가입하기</SignButton>
                         </InputContainer>
                     </form>
                 </InnerContainer>

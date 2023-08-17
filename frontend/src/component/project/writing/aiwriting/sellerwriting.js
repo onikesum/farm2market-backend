@@ -37,6 +37,9 @@ function Sellerwriting() {
   const [product, setProduct] = useState('');
   const [keyword, setKeyword] = useState('');
   const [file, setFile] = useState(null);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('test');
+
   const token = useSelector(state => state.token);
   const onFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -69,12 +72,53 @@ function Sellerwriting() {
           // Handle error response
         });
   };
+  const onCheck = (e) => {
+    e.preventDefault();
 
+    const promotionTitle = `상표명은 ${name} 이고 여기서 팔고있는 상품들은 
+    ${product}가 있어 이 상품의 가격은 ${price}원이고 핵심 키워드는 
+    ${keyword}가 있어 내가 적은 내용들을 바탕으로 적당한 홍보 제목을 1줄 이내로 작성해줘`;
+    axios.get('/chat', {
+      headers: {
+        'X-AUTH-TOKEN': token
+      },
+      params: {
+        prompt: promotionTitle,
+      }
+    })
+        .then((response) => {
+          console.log('성공:', response.data);
+          setTitle(response.data);
+        })
+        .catch((error) => {
+          console.error('업로드 에러:', error);
+          // Handle error response
+        });
+    const promotionMessage = `상표명은 ${name} 이고 여기서 팔고있는 상품들은 
+    ${product}가 있어 이 상품의 가격은 ${price}원이고 핵심 키워드는 
+    ${keyword}가 있어 내가 적은 내용들을 바탕으로 적당한 홍보 멘트를 그럴싸하게 3줄로 작성해줘`;
+
+    axios.get('/chat', {
+      headers: {
+        'X-AUTH-TOKEN': token
+      },
+      params: {
+        prompt: promotionMessage,
+      }
+    })
+        .then((response) => {
+          console.log('성공:', response.data);
+          setBody(response.data);
+        })
+        .catch((error) => {
+          console.error('업로드 에러:', error);
+          // Handle error response
+        });
+  };
   return (
       <IndexContainer>
         <WritingArea>
           <InputArea>
-            <button onClick={check}>테스트 데이터</button>
             <InputH1>
               온라인 등록을 위해 간단한 정보를 입력해주세요!
               <br />
@@ -118,13 +162,13 @@ function Sellerwriting() {
                 />
               </InputKeywordBox>
             </InputBox>
-            <CreatButton>자동 생성</CreatButton>
+            <CreatButton onClick={onCheck}>자동 생성</CreatButton>
             <ResetButton>다시 하기</ResetButton>
           </InputArea>
           <OutputArea>
             <PhotoButton><input type="file" onChange={onFileChange} /></PhotoButton>
-            <OutputTitle />
-            <OutputContent />
+            <OutputTitle value={title} onChange={(e) => setValue(e.target.value)}/>
+            <OutputContent value={body} onChange={(e) => setValue(e.target.value)}/>
             <UploadButton onClick={onSubmit}>업로드</UploadButton>
           </OutputArea>
         </WritingArea>

@@ -32,7 +32,7 @@ const Signin = () => {
         e.preventDefault();
 
 
-        axios.post(`/sign-api/sign-in?id=${id}&password=${password}`)
+        axios.post(`/sign-api/sign-in?id=${id}&password=${password}&name='CHE'`)
             .then((response) => {
                 console.log('로그인 성공!');
                 console.log('로그인 결과:', response.data.token);

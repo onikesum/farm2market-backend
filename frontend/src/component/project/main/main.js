@@ -19,8 +19,10 @@ import {
 } from './component';
 import {Inners2} from "../../emotion/component";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const Main = () => {
+    const responseData = useSelector(state => state.responseData);
     const [isAnimated, setIsAnimated] = useState(false);
 
     const animateElement = () => {
