@@ -14,7 +14,6 @@ export const Title = styled.div`
   ${theme.textVariants.body3_bold}
   border-left: 5px black solid;
   padding-left: 1rem;
-  margin-left: 9rem;
   margin-top: 1rem;
   display: inline-flex;
 `;

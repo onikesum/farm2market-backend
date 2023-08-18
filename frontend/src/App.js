@@ -20,7 +20,7 @@ import Sellerwriting from "./component/project/writing/aiwriting/sellerwriting";
 import Inquirywriting from "./component/project/writing/aiwriting/Inquirywriting";
 import SellDetail from "./component/project/board/sellerboard/selldetail/selldetail";
 import Sellupdate from './component/project/board/sellerboard/sellupdate/sellupdate';
-
+import ScrollToTop from "./ScrollTop";
 import "./App.css";
 import Header from "./component/project/header/header";
 
@@ -30,6 +30,7 @@ function App() {
             <PersistGate loading={null} persistor={persistor}>
                 <BrowserRouter>
                     <Header/>
+                    <ScrollToTop/>
                     <Routes>
                         <Route path="/" element={<Main />} />
                         <Route path="/mypage" element={<Mypage />} />

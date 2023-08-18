@@ -6,7 +6,7 @@ import StyledHr from '../../../img/main/StyledHr.svg';
 import mast from "../../../img/main/Frame.svg"
 import {
     TextContainer, TopBannerArea, Texth2, Texth1,
-     BoardLinktexth2, BoardLinkgroup, BoardLinkSeller, BoardLinkprovider,
+    BoardLinktexth2, BoardLinkgroup, BoardLinkSeller, BoardLinkprovider,
     BoardLinkButton, BoardLinkTextbox, BoardLinktexth3, BoardLinktexth1,
     PriceArea, PriceMoreBox, PriceMoreText, PriceMoreButton, PriceList,
     PriceItem, PriceItemTextBox, ItemName, ItemPrice,
@@ -24,6 +24,9 @@ import {useSelector} from "react-redux";
 const Main = () => {
     const responseData = useSelector(state => state.responseData);
     const [isAnimated, setIsAnimated] = useState(false);
+    const [isAnimated2, setIsAnimated2] = useState(false);
+    const [isAnimated3, setIsAnimated3] = useState(false);
+    const [isAnimated4, setIsAnimated4] = useState(false);
 
     const animateElement = () => {
         const element = document.querySelector(".first-area");
@@ -37,8 +40,48 @@ const Main = () => {
             setIsAnimated(false);
         }
     };
+    const animateElement2 = () => {
+        const element2 = document.querySelector(".second-area"); // 두 번째 영역을 선택
+
+        const windowHeight = window.innerHeight;
+        const elementTop = element2.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight * 0.8) {
+            setIsAnimated2(true);
+        } else {
+            setIsAnimated2(false);
+        }
+    };
+    const animateElement3 = () => {
+        const element3 = document.querySelector(".third-area"); // 두 번째 영역을 선택
+
+        const windowHeight = window.innerHeight;
+        const elementTop = element3.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight * 0.8) {
+            setIsAnimated3(true);
+        } else {
+            setIsAnimated3(false);
+        }
+    };
+
+    const animateElement4 = () => {
+        const element4 = document.querySelector(".fourth-area"); // 두 번째 영역을 선택
+
+        const windowHeight = window.innerHeight;
+        const elementTop = element4.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight * 0.8) {
+            setIsAnimated4(true);
+        } else {
+            setIsAnimated4(false);
+        }
+    };
     const handleScroll = () => {
         animateElement();
+        animateElement2();
+        animateElement3();
+        animateElement4();
     };
 
     useEffect(() => {
@@ -49,6 +92,9 @@ const Main = () => {
     }, []);
     useEffect(() => {
         animateElement();
+        animateElement2();
+        animateElement3();
+        animateElement4();
     }, []);
     return (
         <Inners2>
@@ -66,29 +112,29 @@ const Main = () => {
                 </TextContainer>
             </TopBannerArea>
             <img src={StyledHr} />
-                <BoardLinktexth2>간단하게 온라인 등록하기!</BoardLinktexth2>
-                <BoardLinkgroup className="first-area">
-                    <BoardLinkprovider isAnimated={isAnimated} >
-                        <BoardLinkTextbox>
-                            <BoardLinktexth3>농작물을 제공할 수 있는</BoardLinktexth3>
-                                <BoardLinktexth1>공급자라면?</BoardLinktexth1>
-                        </BoardLinkTextbox>
-                        <Link to={'/proboard'}>
-                            <BoardLinkButton>여기 클릭!</BoardLinkButton>
-                        </Link>
-                    </BoardLinkprovider>
-                    <BoardLinkSeller isAnimated={isAnimated}>
-                        <BoardLinkTextbox>
-                            <BoardLinktexth3>농작물을 팔 수 있는</BoardLinktexth3>
-                            <BoardLinktexth1>판매자라면?</BoardLinktexth1>
-                        </BoardLinkTextbox>
-                        <Link to={'/sellerboard'}>
-                            <BoardLinkButton>여기 클릭!</BoardLinkButton>
-                        </Link>
-                    </BoardLinkSeller>
-                </BoardLinkgroup>
+            <BoardLinktexth2>간단하게 온라인 등록하기!</BoardLinktexth2>
+            <BoardLinkgroup className="first-area">
+                <BoardLinkprovider isAnimated={isAnimated} >
+                    <BoardLinkTextbox>
+                        <BoardLinktexth3>농작물을 제공할 수 있는</BoardLinktexth3>
+                        <BoardLinktexth1>공급자라면?</BoardLinktexth1>
+                    </BoardLinkTextbox>
+                    <Link to={'/proboard'}>
+                        <BoardLinkButton>여기 클릭!</BoardLinkButton>
+                    </Link>
+                </BoardLinkprovider>
+                <BoardLinkSeller isAnimated={isAnimated}>
+                    <BoardLinkTextbox>
+                        <BoardLinktexth3>농작물을 팔 수 있는</BoardLinktexth3>
+                        <BoardLinktexth1>판매자라면?</BoardLinktexth1>
+                    </BoardLinkTextbox>
+                    <Link to={'/sellerboard'}>
+                        <BoardLinkButton>여기 클릭!</BoardLinkButton>
+                    </Link>
+                </BoardLinkSeller>
+            </BoardLinkgroup>
             <img src={StyledHr} />
-            <PriceArea className="price-area" isAnimated={isAnimated}>
+            <PriceArea className="second-area" isAnimated2={isAnimated2}>
                 <PriceMoreBox>
                     <PriceMoreText>현재 농작물의 가격은?</PriceMoreText>
                     <Link to={"/agriboard"}>
@@ -117,20 +163,20 @@ const Main = () => {
                 </PriceList>
             </PriceArea>
             <img src={StyledHr} />
-                <BoardLink02Talk>
-                    <BoardLink02TextBox>
-                        <BoardLink02Textp>농산물 판매를 위해서</BoardLink02Textp>
-                        <BoardLink02Texth1>
-                            온라인 등록을 할 때
-                            <br/>
-                            <EmphasisText>어려움</EmphasisText>을 겪어보셨나요?
-                        </BoardLink02Texth1>
-                    </BoardLink02TextBox>
-                    <BoardLink02TalkImg/>
-                    <BoardLink02TalkImg2/>
-                </BoardLink02Talk>
-            <AIsystem>
-                <AIimg/>
+            <BoardLink02Talk isAnimated3={isAnimated3}>
+                <BoardLink02TextBox>
+                    <BoardLink02Textp>농산물 판매를 위해서</BoardLink02Textp>
+                    <BoardLink02Texth1>
+                        온라인 등록을 할 때
+                        <br/>
+                        <EmphasisText>어려움</EmphasisText>을 겪어보셨나요?
+                    </BoardLink02Texth1>
+                </BoardLink02TextBox>
+                <BoardLink02TalkImg className="third-area" isAnimated3={isAnimated3}/>
+                <BoardLink02TalkImg2 isAnimated3={isAnimated3}/>
+            </BoardLink02Talk>
+            <AIsystem className="fourth-area" isAnimated4={isAnimated4}>
+                <AIimg isAnimated4={isAnimated4}/>
                 <AItext>
                     <AIEmphasisText>인공지능 시스템</AIEmphasisText>이
                     <br/>

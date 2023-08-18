@@ -17,15 +17,18 @@ import {
 import SvgWithMargin, { Inners, Rowplace,OuterContainer } from "../../emotion/component";
 import axios from "axios";
 import {setResponseData, setToken} from "../../../redux/auth";
-import {useSelector} from "react-redux";
-
+import {logOut} from "../../../redux/auth";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 const Mypage = () => {
   const responseData = useSelector(state => state.responseData);
+  const dispatch = useDispatch();
   const token = useSelector(state => state.token);
   const [Array,setArray] = useState([]);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [rules, setRule] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/mypage-api/all-users`,{
@@ -55,6 +58,8 @@ const Mypage = () => {
     })
         .then((response) => {
           console.log('로그 아웃!');
+          dispatch(logOut());
+          navigate('/');
         })
         .catch((error) => {
           console.log('Request failed:', error);
