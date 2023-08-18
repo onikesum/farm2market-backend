@@ -103,8 +103,8 @@ export const ProjectBox = ({ title, content, tags = [], imageSrc }) => {
                 alt="Project"
                 className="project-image"
                 style={{
-                    width: "294px",
-                    height: "18.0625em",
+                    width: "18.5rem",
+                    height: "16rem",
                     borderRadius: "0.625em",
                     marginBottom: "1em",
                 }}
@@ -277,9 +277,8 @@ const SvgWithMargin = () => {
 export default SvgWithMargin;
 
 export const Container = styled.div`
-  background-color: #fff;
   display: flex;
-  width: 1920px;
+  width: 120rem;
   padding: 0px 9rem;
   height: auto;
   flex-direction: column;
@@ -310,8 +309,6 @@ export const Button = styled.div`
   justify-content: center;
   color: #fff;
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -466,8 +463,8 @@ export const SignP = ({ children }) => (
           ${theme.textVariants.body5_bold}
           margin: 0rem;
           color: #ff0000;
-          marginbottom: -16px;
-          marginleft: 11px;
+          margin-bottom: -16px;
+          margin-left: 11px;
           position: absolute;
         `}
     >
