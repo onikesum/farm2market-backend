@@ -11,8 +11,11 @@ import {
 import {Link} from "react-router-dom";
 import {OuterContainer} from "../agricultboard/component";
 import axios from "axios";
+import {useSelector} from "react-redux";
 const Sellerboard = () => {
   const [Array,setArray] = useState([]);
+  const token = useSelector(state => state.token);
+  const [imageData, setImageData] = useState(null);
 
   useEffect(() => {
     axios.get('/seller-board/getAllSellerBoard')
@@ -25,6 +28,25 @@ const Sellerboard = () => {
         });
   }, []);
 
+  const click = () => {
+    axios.get('/image/1', {
+      headers: {
+        'X-AUTH-TOKEN': token
+      },
+      params: {
+        fileId: 1,
+      },
+      responseType: 'arraybuffer'
+    })
+        .then((response) => {
+          console.log('성공:', response.data);
+          setImageData(new Uint8Array(response.data));
+        })
+        .catch((error) => {
+          console.error('업로드 에러:', error);
+          // Handle error response
+        });
+  }
 // 한 페이지에서 보여줄 개수
   const items = 8;
   // 현 페이지를 나타낼 상태
@@ -103,6 +125,7 @@ const Sellerboard = () => {
               내가쓴글
             </Button>
           </ButtonContainer>
+
         </OuterContainer>
         <InblockContainer>
           {currentItems &&
@@ -113,7 +136,7 @@ const Sellerboard = () => {
                         title={project.name}
                         content={project.product}
                         tags={[project.keyword]}
-                        imageSrc={project.imageData}
+                        imageSrc={project.image.id}
                     />
                   </Link>
               ))}

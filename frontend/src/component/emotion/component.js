@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import theme from "../../styles/theme";
+import axios from "axios";
+import {useSelector} from "react-redux";
 
 const StyledProjectBox = styled.div`
   display: flex;
@@ -38,8 +40,6 @@ const StyledTag = styled.div`
   margin: 0 0.9rem 0.9rem 0;
   color: #fff;
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +47,6 @@ const StyledTag = styled.div`
 
 const StyledTitle = styled.h2`
   color: #000;
-  font-family: "Pretendard";
   font-size: 1.5625em;
   font-style: normal;
   font-weight: 700;
@@ -58,7 +57,6 @@ const StyledTitle = styled.h2`
 
 const StyledText = styled.p`
   color: #000;
-  font-family: "Pretendard";
   font-size: 1em;
   font-style: normal;
   font-weight: 500;
@@ -75,11 +73,33 @@ const StyledText = styled.p`
  * @param {string[]} tags - 프로젝트 태그들의 배열
  */
 export const ProjectBox = ({ title, content, tags = [], imageSrc }) => {
+    const [imageData, setImageData] = useState('');
+    const token = useSelector(state => state.token);
+    useEffect(() => {
+        if (imageSrc) {
+            axios
+                .get(`/image/${imageSrc}`, {
+                    headers: {
+                        'X-AUTH-TOKEN': token // Add your token here
+                    },
+                    responseType: 'arraybuffer'
+                })
+                .then((response) => {
+                    setImageData(new Uint8Array(response.data));
+                })
+                .catch((error) => {
+                    console.error('Error fetching image:', error);
+                });
+        }
+    }, [imageSrc]);
+    if (!imageSrc) {
+        return null; // imageSrc가 없으면 null 또는 플레이스홀더 반환
+    }
     const generatedTags = tags.length === 0 ? ["임의 태그"] : tags;
     return (
         <StyledProjectBox title={title} content={content} tags={tags}>
             <img
-                src={imageSrc} // 이미지 경로 설정
+                src={`data:image/png;base64,${btoa(String.fromCharCode(...imageData))}`}
                 alt="Project"
                 className="project-image"
                 style={{
@@ -225,9 +245,9 @@ export const IndexContainer = styled.div`
 export const Rowplace = ({ children }) => (
     <div
         css={css`
-      display: flex;
-      flex-direction: row;
-    `}
+          display: flex;
+          flex-direction: row;
+        `}
     >
         {children}
     </div>
@@ -354,8 +374,8 @@ export const Inners2 = ({ children }) => (
           align-items: center;
           box-sizing:border-box;
           gap: 5rem;
-          
-    `}
+
+        `}
     >
         {children}
     </div>
@@ -368,7 +388,7 @@ export const InblockContainer = ({ children }) => (
           gap: 5rem;
           flex-wrap: wrap;
           overflow-x: hidden;
-    `}
+        `}
     >
         {children}
     </div>
@@ -377,20 +397,20 @@ export const InblockContainer = ({ children }) => (
 export const InnerContainer = ({ width, children }) => (
     <section
         css={css`
-      width: ${width};
-      height: auto;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      padding: 4.5rem;
-      background: #76c56f;
-      border-radius: 2rem;
-      color: #fff;
-      gap: 3.6rem;
+          width: ${width};
+          height: auto;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          padding: 4.5rem;
+          background: #76c56f;
+          border-radius: 2rem;
+          color: #fff;
+          gap: 3.6rem;
 
-      ${theme.textVariants.body1}
-    `}
+          ${theme.textVariants.body1}
+        `}
     >
         {children}
     </section>
@@ -398,13 +418,13 @@ export const InnerContainer = ({ width, children }) => (
 export const InputContainer = ({ width, children }) => (
     <section
         css={css`
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      gap: 2.5rem;
-    `}
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          gap: 2.5rem;
+        `}
     >
         {children}
     </section>
@@ -443,13 +463,13 @@ export const SignInput = styled.input`
 export const SignP = ({ children }) => (
     <p
         css={css`
-      ${theme.textVariants.body5_bold}
-      margin: 0rem;
-      color: #ff0000;
-      marginbottom: -16px;
-      marginleft: 11px;
-      position: absolute;
-    `}
+          ${theme.textVariants.body5_bold}
+          margin: 0rem;
+          color: #ff0000;
+          marginbottom: -16px;
+          marginleft: 11px;
+          position: absolute;
+        `}
     >
         {children}
     </p>
@@ -457,15 +477,15 @@ export const SignP = ({ children }) => (
 export const CheckContainer = ({ children }) => (
     <div
         css={css`
-      margin: 0 auto;
-      display: flex;
-      flex-direction: row;
-      align-items: start;
-      position: relative;
-      left: 200px;
-          
-      gap: 2rem;
-    `}
+          margin: 0 auto;
+          display: flex;
+          flex-direction: row;
+          align-items: start;
+          position: relative;
+          left: 200px;
+
+          gap: 2rem;
+        `}
     >
         {children}
     </div>
@@ -474,19 +494,19 @@ export const CheckContainer = ({ children }) => (
 export const Cblock = ({ width, background, color, children }) => (
     <div
         css={css`
-      width: ${width};
-      margin: 0 auto;
-      display: flex;
-      text-align: center;
-      align-items: center; /* 수직 가운데 정렬 */
-      justify-content: center;
-      flex-direction: column;
-      border-radius: 5px 5px 0px 0px;
-      padding: 0.5rem 1.5rem;
-      background: ${background};
-      color: ${color};
-      ${theme.textVariants.body5_bold}
-    `}
+          width: ${width};
+          margin: 0 auto;
+          display: flex;
+          text-align: center;
+          align-items: center; /* 수직 가운데 정렬 */
+          justify-content: center;
+          flex-direction: column;
+          border-radius: 5px 5px 0px 0px;
+          padding: 0.5rem 1.5rem;
+          background: ${background};
+          color: ${color};
+          ${theme.textVariants.body5_bold}
+        `}
     >
         {children}
     </div>
@@ -497,5 +517,5 @@ export const OuterContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  width: 101.625rem;  
+  width: 101.625rem;
 `;
