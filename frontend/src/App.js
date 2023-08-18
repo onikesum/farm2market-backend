@@ -19,6 +19,7 @@ import Findresultpass from "./component/project/find/findpassword/result";
 import Sellerwriting from "./component/project/writing/aiwriting/sellerwriting";
 import Inquirywriting from "./component/project/writing/aiwriting/Inquirywriting";
 import SellDetail from "./component/project/board/sellerboard/selldetail/selldetail";
+import Supplierwriting from "./component/project/writing/aiwriting/supplierwriting";
 import Sellupdate from './component/project/board/sellerboard/sellupdate/sellupdate';
 import ScrollToTop from "./ScrollTop";
 import "./App.css";
@@ -47,6 +48,7 @@ function App() {
                         <Route path="/findid/result" element={<Findresultid />} />
                         <Route path="/findpass/result" element={<Findresultpass />} />
                         <Route path="/seller/wirte" element={<Sellerwriting />} />
+                        <Route path="/supplier/wirte" element={<Sellerwriting />} />
                         <Route path="/Inquiry/wirte" element={<Inquirywriting />} />
                         <Route path="/sellerboard/selldetail/:id/sellupdate" element={<Sellupdate/>} />
                     </Routes>
