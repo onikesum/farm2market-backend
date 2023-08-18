@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 //import { useParams } from 'react-router-dom';
-import { useParams, Link } from 'react-router-dom'; // Link 컴포넌트 추가
+import {useParams, Link, useNavigate} from 'react-router-dom'; // Link 컴포넌트 추가
 import { useSelector } from 'react-redux';
 import {
-    ChatButton, ChatLogo, ContactBox, ContactContent, ContentBox, ContentImg,
+    ChatButton, ChatButton2, ChatLogo, ContactBox, ContactContent, ContentBox, ContentImg,
     Explan, ExplanSpan, IndexContainer, InfoText, InfoTextSpan,
-    IntroBox, IntroContent, IntroTitle, ProfileImg, SellerInfo,
-    SellerInfoBox, WantSellerBox, WantSellerContent
+    IntroBox, IntroContent, IntroTitle, Mainimg, ProfileImg, SellerInfo,
+    SellerInfoBox, Selltest, WantSellerBox, WantSellerContent
 } from './component';
 import axios from "axios";
+import {Inners} from "../../../../emotion/component";
 
 
 function SellDetail() {
     const [data, setData] = useState({});
     const token = useSelector(state => state.token);
+    const [imageData, setImageData] = useState(null);
+    const navigate = useNavigate();
     const { id } = useParams(); // 바깥으로 이동
 
     useEffect(() => {
@@ -25,11 +28,33 @@ function SellDetail() {
             .then(response => {
                 const dataArray = response.data;
                 setData(dataArray);
+                console.log(dataArray.imageId); // 확인용
+                return dataArray.imageId; // 이미지 ID 반환
+            })
+            .then(imageId => {
+                // 이미지 데이터를 가져오는 API 호출
+                axios.get(`/image/${imageId}`, {
+                    headers: {
+                        'X-AUTH-TOKEN': token
+                    },
+                    params: {
+                        fileId: imageId,
+                    },
+                    responseType: 'arraybuffer'
+                })
+                    .then((response) => {
+                        console.log('이미지 데이터 성공:', response.data);
+                        setImageData(new Uint8Array(response.data));
+                    })
+                    .catch((error) => {
+                        console.error('이미지 데이터 업로드 에러:', error);
+                        // Handle error response
+                    });
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, [id]); // 의존성 배열에 id 추가
+    }, [id, token]);
 
     function handleDelete() {
         axios.delete(`/seller-board?id=${id}`, { // id 사용
@@ -39,15 +64,21 @@ function SellDetail() {
         })
             .then(response => {
                 console.log("성공적으로 삭제되었습니다.", response.data);
+                navigate("/sellerboard");
             })
             .catch(error => {
                 console.error('Error deleting data:', error);
             });
     }
     return (
-        <IndexContainer>
+        <Inners>
+            {imageData && (
+                <Mainimg
+                    src={`data:image/png;base64,${btoa(String.fromCharCode(...imageData))}`}
+                    alt="이미지"
+                />
+            )}
             <ContentBox>
-                <ContentImg />
                 <SellerInfoBox>
                     <SellerInfo>
                         <ProfileImg />
@@ -62,14 +93,17 @@ function SellDetail() {
                             )}
                         </InfoText>
                     </SellerInfo>
-                    <ChatButton>
-                        <ChatLogo />
-                        채팅으로 문의하기
-                    </ChatButton>
-                    <button onClick={handleDelete}>삭제</button> {/* 삭제 버튼 */}
-                    <Link to={`/sellerboard/selldetail/${id}/sellupdate`}>
-                        <button>수정하기</button>
-                    </Link>
+                    <Selltest>
+                        <ChatButton>
+                            <ChatLogo />
+                            채팅으로 문의하기
+                        </ChatButton>
+                        <ChatButton2 onClick={handleDelete}>삭제</ChatButton2> {/* 삭제 버튼 */}
+                        <Link to={`/sellerboard/selldetail/${id}/sellupdate`}>
+                            <ChatButton2>수정하기</ChatButton2>
+                        </Link>
+                    </Selltest>
+
                 </SellerInfoBox>
                 <Explan>
                     영양가 높은{' '}
@@ -98,7 +132,7 @@ function SellDetail() {
                     </WantSellerContent>
                 </WantSellerBox>
             </ContentBox>
-        </IndexContainer>
+        </Inners>
     );
 }
 

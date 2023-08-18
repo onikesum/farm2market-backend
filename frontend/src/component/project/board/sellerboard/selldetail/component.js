@@ -1,26 +1,16 @@
 import styled from 'styled-components';
-// import SellContent from '../../../../img/selldetail/sellcontent.png';
-// import SellerProfileImg from '../../../../img/selldetail/profile.svg';
-//import ChatLogoImg from '../../../../../img/selldetail/chatlogo.svg';
-
 const emptyImageURL = 'data:image/png;base64,iVBORw...'; // 빈 이미지의 Base64 데이터
 
 
-export const IndexContainer = styled.div`
-  width: 1920px;
-  background-color: #fff;
-  position: relative;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
+
 
 export const ContentBox = styled.div`
-  width: 1132px;
-  height: 1700px;
-  margin-top: 150px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 `;
 
 export const ContentImg = styled.div`
@@ -32,17 +22,27 @@ export const ContentImg = styled.div`
 `;
 
 export const SellerInfoBox = styled.div`
-  width: 1135px;
-  height: 100px;
+  width: 100%;
+  height: auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 50px;
+  justify-items: center;
+  text-align: center;
+  gap: 10rem;
+  
 `;
-
+export const Selltest = styled.div`
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  gap: 0.3rem;
+  
+`;
 export const SellerInfo = styled.div`
-  width: 290px;
-  height: 100px;
+  width: 50%;
   display: flex;
   justify-content: space-between;
 `;
@@ -55,18 +55,17 @@ export const ProfileImg = styled.div`
 `;
 export const InfoText = styled.h1`
   color: #000;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: 35px;
 `;
-
+export const Mainimg = styled.img`
+    width: 100%;
+  height: 20rem;
+`;
 export const InfoTextSpan = styled.span`
   color: #000;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -74,21 +73,36 @@ export const InfoTextSpan = styled.span`
 `;
 
 export const ChatButton = styled.div`
-  width: 367px;
-  height: 58px;
-  flex-shrink: 0;
-  border-radius: 5px;
-  background: #76C56F;
+  width: 18rem;
+  height: 4rem;
+  border-radius: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   color: #FFF;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
+  background: #76C56F;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: 20px; /* 83.333% */
+  cursor: pointer;
+`;
+export const ChatButton2 = styled.div`
+  width: 10rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: #76C56F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #FFF;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 83.333% */
+  cursor: pointer;
 `;
 
 export const ChatLogo = styled.div`
@@ -109,8 +123,6 @@ export const Explan = styled.div`
   display: flex;
   align-items: center;
   color: #3A6E67;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
   font-size: 28px;
   font-style: normal;
   font-weight: 400;
@@ -119,8 +131,6 @@ export const Explan = styled.div`
 
 export const ExplanSpan = styled.span`
   color: #3A6E67;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
   font-size: 28px;
   font-style: normal;
   font-weight: 600;

@@ -113,7 +113,7 @@ const Mypage = () => {
                     </svg>
                   </svg>
 
-                  <p>내 개시물</p>
+                  <p>내 게시물</p>
                   <PageboxText>0 개</PageboxText>
                 </Pagebox>
                 <Pagebox>

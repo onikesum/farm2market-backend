@@ -30,6 +30,7 @@ import {
 } from './component';
 import axios from "axios";
 import {setToken} from "../../../../redux/auth";
+import {useNavigate} from "react-router-dom";
 
 function Sellerwriting() {
   const [name, setName] = useState('');
@@ -39,7 +40,7 @@ function Sellerwriting() {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('test');
-
+  const navigate = useNavigate();
   const token = useSelector(state => state.token);
   function compressImage(file, maxWidth, maxHeight, quality) {
     return new Promise((resolve, reject) => {
@@ -105,6 +106,7 @@ function Sellerwriting() {
     })
         .then((response) => {
           console.log('업로드 성공:', response.data);
+          navigate("/sellerboard");
           // Handle success response
         })
         .catch((error) => {
