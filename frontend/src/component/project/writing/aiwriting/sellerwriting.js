@@ -30,6 +30,7 @@ import {
 } from './component';
 import axios from "axios";
 import {setToken} from "../../../../redux/auth";
+import {useNavigate} from "react-router-dom";
 
 function Sellerwriting() {
   const [name, setName] = useState('');
@@ -39,13 +40,53 @@ function Sellerwriting() {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('test');
-
+  const navigate = useNavigate();
   const token = useSelector(state => state.token);
-  const onFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
-  const check = () => {
-    console.log('토큰 값:', token);
+  function compressImage(file, maxWidth, maxHeight, quality) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+            (blob) => {
+              resolve(blob);
+            },
+            'image/jpeg', // 이미지 포맷 설정 (다른 포맷도 가능)
+            quality // 이미지 품질 설정 (0~1)
+        );
+      };
+
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  const onFileChange = async (event) => {
+    const selectedFile = event.target.files[0];
+
+    const compressedBlob = await compressImage(selectedFile, 300, 300, 0.5); // 예시 설정
+
+    setFile(compressedBlob);
   };
   const onSubmit = (e) => {
     e.preventDefault();
@@ -65,6 +106,7 @@ function Sellerwriting() {
     })
         .then((response) => {
           console.log('업로드 성공:', response.data);
+          navigate("/sellerboard");
           // Handle success response
         })
         .catch((error) => {
@@ -115,6 +157,7 @@ function Sellerwriting() {
           // Handle error response
         });
   };
+
   return (
       <IndexContainer>
         <WritingArea>

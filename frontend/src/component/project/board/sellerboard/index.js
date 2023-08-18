@@ -28,25 +28,7 @@ const Sellerboard = () => {
         });
   }, []);
 
-  const click = () => {
-    axios.get('/image/1', {
-      headers: {
-        'X-AUTH-TOKEN': token
-      },
-      params: {
-        fileId: 1,
-      },
-      responseType: 'arraybuffer'
-    })
-        .then((response) => {
-          console.log('성공:', response.data);
-          setImageData(new Uint8Array(response.data));
-        })
-        .catch((error) => {
-          console.error('업로드 에러:', error);
-          // Handle error response
-        });
-  }
+
 // 한 페이지에서 보여줄 개수
   const items = 8;
   // 현 페이지를 나타낼 상태

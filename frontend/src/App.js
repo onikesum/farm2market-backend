@@ -19,8 +19,9 @@ import Findresultpass from "./component/project/find/findpassword/result";
 import Sellerwriting from "./component/project/writing/aiwriting/sellerwriting";
 import Inquirywriting from "./component/project/writing/aiwriting/Inquirywriting";
 import SellDetail from "./component/project/board/sellerboard/selldetail/selldetail";
-import Supplierwriting from "./component/project/writing/aiwriting/supplierwriting";
+import SupplierWriting from "./component/project/writing/aiwriting/supplierwriting";
 import Sellupdate from './component/project/board/sellerboard/sellupdate/sellupdate';
+import ProDetail from "./component/project/board/proboard/prodetail";
 import ScrollToTop from "./ScrollTop";
 import "./App.css";
 import Header from "./component/project/header/header";
@@ -38,6 +39,8 @@ function App() {
                         <Route path="/signin" element={<Signin />} />
                         <Route path="/signup" element={<Signup />} />
                         <Route path="/proboard" element={<Proboard />} />
+                        <Route path="/a" element={<Proboard />} />
+                        <Route path='/supplierboard/supplierdetail/:id' element={<ProDetail />}/>
                         <Route path="/sellerboard" element={<Sellerboard />} />
                         <Route path="/sellerboard/selldetail/:id" element={<SellDetail/>} />
                         <Route path="/agriboard" element={<Agriboard />} />
@@ -48,7 +51,7 @@ function App() {
                         <Route path="/findid/result" element={<Findresultid />} />
                         <Route path="/findpass/result" element={<Findresultpass />} />
                         <Route path="/seller/wirte" element={<Sellerwriting />} />
-                        <Route path="/supplier/wirte" element={<Sellerwriting />} />
+                        <Route path="/supplier/wirte" element={<SupplierWriting />} />
                         <Route path="/Inquiry/wirte" element={<Inquirywriting />} />
                         <Route path="/sellerboard/selldetail/:id/sellupdate" element={<Sellupdate/>} />
                     </Routes>
