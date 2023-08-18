@@ -294,25 +294,21 @@ export const InputTitle = styled.input`
     border-radius: 5px;
     background: #FFF;
     border: none;
+    ${theme.textVariants.body7_bold};
     ::placeholder {  /* 최신 브라우저 */
         color: #393434;
-        font-feature-settings: 'clig' off, 'liga' off;
-        font-family: Inter;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 20px; /* 83.333% */
+      ${theme.textVariants.body7_bold};
     }
 `;
 
-export const InputContent = styled.input`
+export const InputContent = styled.textarea`
     width: 1418px;
     height: 562px;
     margin-top: 37px;
-    flex-shrink: 0;
-    border-radius: 5px;
     background: #FFF;
     border: none;
+  border-radius: 1rem;
+  ${theme.textVariants.body7_bold};
 `;
 
 export const UploadButton2 = styled.div`
@@ -327,11 +323,10 @@ export const UploadButton2 = styled.div`
     background: #81D87A;
     color: #FFF;
     text-align: center;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Inter;
     font-size: 40px;
     font-style: normal;
     font-weight: 600;
     line-height: 20px; /* 50% */
+  cursor: pointer;
 `;
 

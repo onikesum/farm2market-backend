@@ -172,16 +172,17 @@ export const PriceArea = styled.section`
  flex-direction: column;
  align-items: center;
  opacity: 0;
- transform: translateX(-20px);
+ transform: translateY(20px); /* 아래로 초기 이동 설정 */
  transition: opacity 1s ease, transform 1s ease;
  gap: 5rem;
- ${({ isAnimated }) =>
-     isAnimated &&
+ ${({ isAnimated2 }) =>
+     isAnimated2 &&
      `
-    opacity: 1;
-    transform: translateX(0);
-  `}
+     opacity: 1;
+     transform: translateY(0); /* 위로 이동하여 나타나도록 설정 */
+   `}
 `;
+
 
 export const PriceMoreBox = styled.div`
   width: 100%;
@@ -263,8 +264,16 @@ export const BoardLink02Talk = styled.div`
   background: #F1F6F1;
   display: flex;
   flex-direction: column;
-  align-items: center; 
-
+  align-items: center;
+ opacity: 0;
+ transform: translateY(20px); /* 아래로 초기 이동 설정 */
+ transition: opacity 1s ease, transform 1s ease;
+ ${({ isAnimated3 }) =>
+     isAnimated3 &&
+     `
+     opacity: 1;
+     transform: translateY(0); /* 위로 이동하여 나타나도록 설정 */
+   `}
  `;
 
 export const BoardLink02TextBox = styled.div`
@@ -309,6 +318,16 @@ export const BoardLink02TalkImg = styled.div`
   border: none;
   margin-right: 43.75rem;
   margin-top: -80px;
+ opacity: 0; /* 초기에 숨김 */
+ transform: translateX(20px); /* 초기 위치 설정 */
+ transition: opacity 1s ease, transform 1s ease; /* 애니메이션 효과 */
+ ${({isAnimated3}) =>
+     isAnimated3 &&
+     `
+     opacity: 1;
+     transform: translateY(0);
+   `}
+ \`;
 `;
 
 export const BoardLink02TalkImg2 = styled.div`
@@ -319,6 +338,16 @@ export const BoardLink02TalkImg2 = styled.div`
   border: none;
   margin-left: 43.75rem;
   margin-bottom: 2rem;
+ opacity: 0; /* 초기에 숨김 */
+ transform: translateX(-20px); /* 초기 위치 설정 */
+ transition: opacity 1s ease, transform 1s ease; /* 애니메이션 효과 */
+ ${({isAnimated3}) =>
+     isAnimated3 &&
+     `
+     opacity: 1;
+     transform: translateY(0);
+   `}
+ \`;
 `;
 
 export const AIsystem = styled.div`
@@ -335,6 +364,19 @@ width: 415px;
 height: 345px;
 flex-shrink: 0;
 margin-left:120px;
+  opacity: 0; /* 초기에 숨김 */
+  transform: translateY(20px); /* 초기 위치 설정 */
+  transition: opacity 1s ease, transform 1s ease; /* 애니메이션 효과 */
+  ${({isAnimated4}) =>
+          isAnimated4 &&
+          `
+     opacity: 1;
+     transform: translateY(0);
+   `}
+  \`;
+   &:hover {
+  transform: scale(1.1); /* 이미지를 110% 크기로 확대 */
+ }
 `;
 
 export const AItext = styled.h3`

@@ -60,7 +60,7 @@ const Header = () => {
                 <NavItem as={Link} to="/mypage">
                     마이페이지
                 </NavItem> :
-                    <NavItem>
+                    <NavItem as={Link} to="/signin">
                         마이페이지
                     </NavItem>
                 }
@@ -98,7 +98,7 @@ const Header = () => {
 
                 {isLoggedIn ?
                     <Link to={"/" }>
-                        <LoginButton onClick={handleLogout}>{responseData.name} 로그아웃</LoginButton>
+                        <LoginButton onClick={handleLogout}>{responseData.name}님 로그아웃</LoginButton>
                     </Link>
                     :
                     <Link to={"/signin" }>

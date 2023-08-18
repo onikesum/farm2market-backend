@@ -17,6 +17,7 @@ const Community = () => {
         .then(response => {
           const dataArray = response.data; // Assuming the response data is an array
           setArray(dataArray);
+          console.log(response.data);
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -30,7 +31,6 @@ const Community = () => {
   };
 
   return (
-    <>
       <Inners>
         <OuterContainer>
           <Title>커뮤니티</Title>
@@ -64,7 +64,6 @@ const Community = () => {
           </table>
         </TableContainer>
       </Inners>
-    </>
   );
 };
 
