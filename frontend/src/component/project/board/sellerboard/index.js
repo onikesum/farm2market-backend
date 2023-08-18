@@ -125,7 +125,13 @@ const Sellerboard = () => {
               내가쓴글
             </Button>
           </ButtonContainer>
-
+          <button onClick={click}>test</button>
+          {imageData && (
+              <img
+                  src={`data:image/png;base64,${btoa(String.fromCharCode(...imageData))}`}
+                  alt="이미지"
+              />
+          )}
         </OuterContainer>
         <InblockContainer>
           {currentItems &&

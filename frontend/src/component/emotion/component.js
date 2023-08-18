@@ -73,14 +73,17 @@ const StyledText = styled.p`
  * @param {string[]} tags - 프로젝트 태그들의 배열
  */
 export const ProjectBox = ({ title, content, tags = [], imageSrc }) => {
-    const [imageData, setImageData] = useState('');
+    const [imageData, setImageData] = useState(''); // Initially set to null
+    const [isLoadingImage, setIsLoadingImage] = useState(false);
     const token = useSelector(state => state.token);
+
     useEffect(() => {
-        if (imageSrc) {
+        if (imageSrc && !isLoadingImage && !imageData) { // Only load image if not already loading and not loaded
+            setIsLoadingImage(true);
             axios
                 .get(`/image/${imageSrc}`, {
                     headers: {
-                        'X-AUTH-TOKEN': token // Add your token here
+                        'X-AUTH-TOKEN': token
                     },
                     responseType: 'arraybuffer'
                 })
@@ -89,26 +92,36 @@ export const ProjectBox = ({ title, content, tags = [], imageSrc }) => {
                 })
                 .catch((error) => {
                     console.error('Error fetching image:', error);
+                })
+                .finally(() => {
+                    setIsLoadingImage(false); // Set loading state to false when done loading
                 });
         }
-    }, [imageSrc]);
+    }, [imageSrc, imageData, isLoadingImage, token]);
+
     if (!imageSrc) {
-        return null; // imageSrc가 없으면 null 또는 플레이스홀더 반환
+        return null;
     }
+
     const generatedTags = tags.length === 0 ? ["임의 태그"] : tags;
+
     return (
         <StyledProjectBox title={title} content={content} tags={tags}>
-            <img
-                src={`data:image/png;base64,${btoa(String.fromCharCode(...imageData))}`}
-                alt="Project"
-                className="project-image"
-                style={{
-                    width: "18.5rem",
-                    height: "16rem",
-                    borderRadius: "0.625em",
-                    marginBottom: "1em",
-                }}
-            />
+            {isLoadingImage ? (
+                <div>Loading Image...</div> // Display loading indicator
+            ) : (
+                <img
+                    src={`data:image/png;base64,${btoa(String.fromCharCode(...imageData))}`}
+                    alt="Project"
+                    className="project-image"
+                    style={{
+                        width: "18.5rem",
+                        height: "16rem",
+                        borderRadius: "1rem",
+                        marginBottom: "1em",
+                    }}
+                />
+            )}
 
             <StyledTitle>{title}</StyledTitle>
             <StyledText>
@@ -128,16 +141,15 @@ export const ProjectBox = ({ title, content, tags = [], imageSrc }) => {
 const StyledProjectBox2 = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   padding: 20px;
   padding-bottom: 0px;
   color: #000;
   width: 294px;
   height: 408px;
   border-radius: 10px;
-  margin: 0;
+  margin: 0rem;
   img.project-image {
-    width: 294px;
+    width: 18.5rem;
     height: 18.0625em;
     border-radius: 0.625em;
   }
