@@ -68,7 +68,6 @@ const Proboard = () => {
       <>
         <Inners>
           <OuterContainer>
-            <button onClick={click}>dfdf</button>
             <Title>공급자 게시판</Title>
             <ButtonContainer>
               <Link
