@@ -108,7 +108,7 @@ const Signup = () => {
                                     <SignP>{errors.phoneNumber.message}</SignP>
                                 )}
                             </div>
-                            <SignButton>가입하기</SignButton>
+                            <SignButton onClick={handleSubmit(onSubmit)}>가입하기</SignButton>
                         </InputContainer>
                     </form>
                 </InnerContainer>
