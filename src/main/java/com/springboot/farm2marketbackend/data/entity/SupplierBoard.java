@@ -34,6 +34,7 @@ public class SupplierBoard {
 
     @Column(nullable = false)
     private String keyword;
+    @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
