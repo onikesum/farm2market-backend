@@ -46,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests() // 리퀘스트에 대한 사용권한 체크
                 .antMatchers("/sign-api/sign-in", "/sign-api/sign-up",
-                        "/sign-api/exception", "/sign-api/find-id","/sign-api/find-password", "/all","/supplier-board/getAllSupplierBoard", "/seller-board/getAllSellerBoard").permitAll() // 가입 및 로그인 주소는 허용
+                        "/sign-api/exception", "/sign-api/find-id","/sign-api/find-password", "/all","/supplier-board/getAllSupplierBoard", "/seller-board/getAllSellerBoard", "/supplier-board/**").permitAll() // 가입 및 로그인 주소는 허용
                 .antMatchers(HttpMethod.GET, "/supplier-board/**").permitAll() // supply board로 시작하는 Get 요청은 허용
 
                 .antMatchers("**exception**").permitAll()
